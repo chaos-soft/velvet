@@ -1,0 +1,28 @@
+textarea,
+input[type=text] {
+  width: 1024px;
+}
+
+.field-images > div > label {
+  float: none;
+}
+
+.field-images > div > p {
+  text-align: center;
+}
+
+.field-images > div > p > img {
+  border: 5px solid rgba(0, 0, 0, .14);
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 3px;
+  transition: border-color 200ms;
+}
+
+.field-images > div > p > img.selected {
+  border-color: rgba(255, 0, 0, .5);
+}
+
+.field-images > div > textarea {
+  display: none;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/store/css/base.css">
+  <link rel="stylesheet" href="/store/css/style.css">
+  <meta charset="utf-8">
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <meta name="keywords" content="{% block keywords %}{% endblock %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block script %}{% endblock %}
+  <title>{% block title %}57 Street — статьи, стримы и всякое{% endblock %}</title>
+  <header class="header wrapper">
+    <h1><a href="/"><span>5</span><span>7</span> Street</a></h1>
+    <nav>
+      <a href="{% url 'article' 57 %}">Мой маленький стрим</a>
+    </nav>
+  </header>
+  <div class="line mb40"></div>
+  {% block content %}{% endblock %}
+  <div class="line mb20"></div>
+  <footer>
+    <p>© 2008–2057 <a href="/">57 Street</a></p>
+    <p><a href="{% url 'article' 79 %}">О сайте</a></p>
+  </footer>
+</html>

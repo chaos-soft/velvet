@@ -1,0 +1,260 @@
+a,
+.stream > .controls > i.active {
+  color: #177cd8;
+}
+
+a,
+.header > h1 > a:hover,
+.header > nav > a:hover,
+.articles > nav > ul > li > a:hover {
+  text-decoration: none;
+}
+
+footer,
+.album,
+.stream > .chats,
+.articles > nav > ul {
+  display: flex;
+  justify-content: center;
+}
+
+footer > p,
+.wrapper,
+.album > a,
+.stream > div,
+.stream > div > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h1,
+h2 {
+  font: 20px/1 lobster, cursive;
+}
+
+main,
+.mb40,
+.articles > article {
+  margin-bottom: 40px;
+}
+
+p,
+ul,
+ol,
+h1,
+h2,
+pre,
+.mb20,
+.iframe,
+.album > a,
+.stream > .controls {
+  margin-bottom: 20px;
+}
+
+pre,
+.articles > nav > ul > li > a {
+  border-radius: 4px;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}
+
+.album > a > img,
+.articles > article img {
+  max-height: 220px;
+}
+
+.header,
+.iframe {
+  overflow: hidden;
+  position: relative;
+}
+
+.header a,
+.header > h1 > a > span {
+  transition: color 200ms;
+}
+
+.header > h1 > a,
+.header > nav > a:hover {
+  color: black;
+}
+
+.stream,
+.header > nav,
+.iframe > iframe {
+  position: absolute;
+}
+.stream,
+.articles > nav > ul > li > a {
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.stream > .controls,
+.articles > nav > ul {
+  align-items: center;
+}
+
+.stream > .controls > *,
+.articles > nav > ul > li > a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  font: 14px/20px -apple-system, arial, sans-serif;
+}
+
+code {
+  font-family: monospace;
+}
+
+footer {
+  color: rgba(0, 0, 0, .5);
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+pre {
+  box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, .15);
+  background-color: rgba(0, 0, 0, .02);
+  padding: 10px 20px;
+  white-space: pre-wrap;
+}
+
+.album {
+  flex-wrap: wrap;
+}
+
+.article > div > h2 {
+  margin-left: 20px;
+}
+
+.article > footer {
+  font-size: 12px;
+}
+
+.article > h1 {
+  font-size: 26px;
+}
+
+.articles > nav > ul {
+  list-style: none;
+}
+
+.articles > nav > ul > li {
+  margin: 0 5px;
+}
+
+.articles > nav > ul > li > a {
+  display: inline-block;
+  padding: 3px 7px;
+  transition: background-color 200ms;
+}
+
+.articles > nav > ul > li > a:hover {
+  background-color: #177cd8;
+}
+
+.header {
+  padding-top: 20px;
+}
+
+.header a {
+  padding: 100px 0;
+}
+
+.header > h1 > a {
+  font-size: 42px;
+  text-shadow: 2px 2px 0 white, 3px 3px 0 rgba(0, 0, 0, .3);
+}
+
+.header > h1 > a:hover > span:first-child {
+  color: #622e86;
+}
+
+.header > h1 > a:hover > span:last-child {
+  color: #e6458b;
+}
+
+.header > nav {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header > nav > a {
+  color: rgba(0, 0, 0, .3);
+  font-weight: bold;
+}
+
+.iframe {
+  padding-top: 56.25%;
+}
+
+.iframe > iframe {
+  height: 100%;
+  top: 0;
+  width: 100%;
+}
+
+.line {
+  background-color: rgba(0, 0, 0, .125);
+  height: 1px;
+}
+
+.stream {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .stream {
+    bottom: 0;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    left: 50%;
+    padding: 20px 0;
+    transition: transform 200ms;
+  }
+
+  .stream.hidden {
+    transform: translate(-50%, calc(100% - 10px));
+  }
+
+  .stream > .chats > iframe {
+    height: 460px;
+    width: 300px;
+  }
+
+  .stream > .controls {
+    display: flex;
+  }
+
+  .stream > .controls > * {
+    margin-right: 0;
+  }
+
+  .stream > .controls > i {
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .stream,
+  .stream:hover {
+    transform: translate(-50%, 0);
+  }
+
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 940px;
+  }
+}

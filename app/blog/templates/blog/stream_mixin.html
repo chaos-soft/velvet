@@ -1,0 +1,29 @@
+{% with code=object.get_code_configparser %}
+  <div class="iframe">
+    <iframe src="about:blank" allowfullscreen></iframe>
+    <div class="stream">
+      <div class="controls">
+        {% for k, v in code.items %}
+          {% if k == "t" %}
+            <a href="https://player.twitch.tv/?channel={{ v }}&parent=localhost">Twitch</a>
+          {% elif k == "g" %}
+            <a href="https://goodgame.ru/player?{{ v }}">GoodGame</a>
+          {% endif %}
+        {% endfor %}
+        <i id="fullscreen" class="material-icons" title="Полноэкранный режим (f)">fullscreen</i>
+        <i id="chat" class="material-icons" title="Показать, скрыть панель">chat</i>
+      </div>
+      <div class="chats">
+        {% for k, v in code.items %}
+          {% if k == "t" %}
+            <iframe src="https://www.twitch.tv/embed/{{ v }}/chat?parent=localhost"></iframe>
+          {% elif k == "g" %}
+            <iframe src="https://goodgame.ru/chat/{{ v }}"></iframe>
+          {% elif k == "s" %}
+            <iframe src="https://sc2tv.ru/{{ v }}/chat"></iframe>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endwith %}

@@ -17,4 +17,3 @@ class Command(BaseCommand):
             article = Article.objects.get(pk=row[3])
             article.images += [row[1]]
             article.save()
-            # print(article.__dict__)

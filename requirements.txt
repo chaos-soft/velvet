@@ -6,5 +6,3 @@ markdown
 mysqlclient
 requests
 youtube-dl
-# flake8
-# flake8-docstrings

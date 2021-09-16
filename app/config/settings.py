@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'velvet.urls'
@@ -127,5 +127,6 @@ TIME_ZONE = 'Europe/Moscow'
 STATIC_URL = '/static/'
 
 DATETIME_FORMAT = 'Y-m-d H:i:s'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store/')
 MEDIA_URL = '/store/'

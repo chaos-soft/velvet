@@ -12,14 +12,15 @@
   {% endif %}
   <main class="article wrapper">
     <h1>{{ object }}</h1>
-    <div>{{ object.get_content|safe }}</div>
     {% if object.type == object.Type.YOUTUBE %}
       <div class="iframe">
         <iframe src="https://www.youtube.com/embed/?playlist={{ object.get_code_csv }}&loop=1"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
       </div>
-    {% elif object.type == object.Type.ALBUM %}
+    {% endif %}
+    <div>{{ object.get_content|safe }}</div>
+    {% if object.type == object.Type.ALBUM %}
       <div class="album">
         {% for image in object.images %}
           <a href="/store/{{ image }}">

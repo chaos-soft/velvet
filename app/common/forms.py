@@ -1,6 +1,7 @@
 from datetime import date
 
 from django import forms
+from django.core.exceptions import FieldDoesNotExist
 from django.core.files.storage import default_storage
 
 
@@ -37,7 +38,9 @@ class DocumentForm(forms.ModelForm):
             # В форме могут быть дополнительные поля.
             if hasattr(self.instance, k):
                 setattr(self.instance, k, v)
-                if type(v) in [bool, int, list, str]:
+                try:
+                    self.instance._meta.get_field(k)
+                except FieldDoesNotExist:
                     if v:
                         self.instance.document[k] = v
                     elif k in self.instance.document:

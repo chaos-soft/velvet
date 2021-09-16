@@ -1,6 +1,10 @@
+from datetime import datetime
+
 from common.forms import DocumentForm
 from common.functions import create_thumbnail, delete_thumbnail
 from django import forms
+from django.conf import settings
+from django.utils.dateformat import format
 
 from .models import Article
 
@@ -30,6 +34,11 @@ class ArticleForm(DocumentForm):
             'status',
         ]
         model = Article
+
+    def clean(self):
+        cd = super().clean()
+        cd['date_modified'] = format(datetime.today(), settings.DATETIME_FORMAT)
+        return cd
 
     def delete_image(self, i):
         delete_thumbnail(self.cleaned_data['images'][i])

@@ -4,9 +4,7 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        total = 0
         for article in Article.objects.all().iterator():
-            if article.cover:
-                print(article.cover)
-            if article.cover[:2] == '//':
-                article.document['cover'] = f'https:{article.cover}'
-                # article.save()
+            total += len(article.images)
+        self.stdout.write(f'{total}')

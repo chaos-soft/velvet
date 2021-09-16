@@ -1,9 +1,11 @@
-from datetime import date
+from datetime import datetime
 
 from common.forms import DocumentForm
 from common.functions import get_html_title, get_thumbnail, take_screenshot
 from django import forms
+from django.conf import settings
 from django.db import models
+from django.utils.dateformat import format
 
 from .models import Bookmark, Category
 
@@ -37,7 +39,7 @@ class BookmarkForm(DocumentForm):
         self.xclean_screenshot()
         self.xclean_title()
         if not self.instance.id:
-            cd['date'] = date.today().strftime('%Y-%m-%d')
+            cd['date'] = format(datetime.today(), settings.DATETIME_FORMAT)
         return cd
 
     def clean_urls(self):

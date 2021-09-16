@@ -3,6 +3,11 @@ input[type=text] {
   width: 1024px;
 }
 
+:root {
+  --body-fg: black;
+  --body-quiet-color: black;
+}
+
 .field-images > div > label {
   float: none;
 }

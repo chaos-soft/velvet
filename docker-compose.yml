@@ -25,4 +25,5 @@ services:
     tty: true
     volumes:
       - ./app:/velvet
+      - ./store:/velvet/store
     working_dir: /velvet

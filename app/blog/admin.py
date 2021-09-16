@@ -12,6 +12,7 @@ class ArticleAdmin(DocumentAdmin):
         'id',
         '__str__',
         'date',
+        'date_modified',
         'get_is_comments',
         'is_published',
         'type',

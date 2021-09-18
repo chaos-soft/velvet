@@ -42,13 +42,13 @@ class BookmarksTest(SimpleTestCase):
         self.assertEqual(admin.get_category(self.bookmark2), 'q0t')
 
     def test_forms(self):
-        post = {'urls': 'http://57st.net/linkshop\r\nv5i'}
+        post = {'urls': 'https://57st.net/articles/125\r\nv5i'}
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertEqual(form.initial['urls'], 'hda\r\nn0k')
         self.assertTrue(form.is_valid())
         form.save(commit=False)
-        self.assertEqual(self.bookmark1.urls, ['http://57st.net/linkshop', 'v5i'])
-        self.assertEqual(self.bookmark1.title, 'Linkshop')
+        self.assertEqual(self.bookmark1.urls, ['https://57st.net/articles/125', 'v5i'])
+        self.assertEqual(self.bookmark1.title, 'Retrowave')
         post['title'] = 'poh'
         form = BookmarkForm(post, instance=self.bookmark2)
         self.assertTrue(form.is_valid())

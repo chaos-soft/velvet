@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block description %}{{ object.get_intro }}{% endblock %}
+{% block script %}
+  {% if object.type == object.Type.STREAM %}
+    <script src="/store/js/stream.js"></script>
+  {% endif %}
+{% endblock %}
+{% block title %}{{ object }}{% endblock %}
+{% block content %}
+  {% if object.type == object.Type.STREAM %}
+    {% include "./stream_mixin.html" %}
+  {% endif %}
+  <main class="article wrapper">
+    <h1>{{ object }}</h1>
+    {% if object.type == object.Type.YOUTUBE %}
+      <div class="iframe">
+        <iframe src="https://www.youtube.com/embed/?playlist={{ object.get_code_csv }}&loop=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    {% endif %}
+    <div>{{ object.get_content|safe }}</div>
+    {% if object.type == object.Type.ALBUM %}
+      <div class="album">
+        {% for image in object.images %}
+          <a href="/store/{{ image }}">
+            <img src="/store/thumbnails/{{ image }}"
+                 alt="{{ image }}" title="{{ image }}">
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if object.is_published %}
+      <footer>{{ object.date }}</footer>
+    {% endif %}
+  </main>
+{% endblock %}

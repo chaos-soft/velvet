@@ -1,0 +1,309 @@
+:root {
+  --blue: #177cd8;
+  --dark-violet: #cb41aa;
+  --orange: #ff8e24;
+  --pony-dark: #622e86;
+  --pony-light: #e6458b;
+  --purple: #d92436;
+  --red: #9281fc;
+}
+
+a,
+.stream > .controls > .active {
+  color: var(--blue);
+}
+
+a,
+.header > h1 > a:hover,
+.header > nav > a:hover,
+.articles > nav > ul > li > a:hover {
+  text-decoration: none;
+}
+
+footer,
+.album,
+.articles > nav > ul,
+.stream > .chats,
+.stream > .controls {
+  display: flex;
+  justify-content: center;
+}
+
+footer > p,
+.album > a,
+.stream > div,
+.stream > div > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h1,
+h2 {
+  font: 20px/1 lobster, cursive;
+}
+
+main,
+.mb40,
+.articles > article {
+  margin-bottom: 40px;
+}
+
+h1,
+h2,
+ol,
+p,
+pre,
+ul,
+.album > a,
+.iframe,
+.mb20,
+.stream > div > * {
+  margin-bottom: 20px;
+}
+
+pre,
+.articles > nav > ul > li > a {
+  border-radius: 4px;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}
+
+.album > a > img,
+.articles > article img {
+  max-height: 220px;
+}
+
+.article > h1,
+.error > h1 {
+  font-size: 26px;
+}
+
+.color5,
+.header > h1 > a:hover > span:first-child {
+  color: var(--pony-dark);
+}
+
+.color6,
+.header > h1 > a:hover > span:last-child {
+  color: var(--pony-light);
+}
+
+.header,
+.iframe {
+  overflow: hidden;
+  position: relative;
+}
+
+.header a,
+.header > h1 > a > span {
+  transition: color 200ms;
+}
+
+body,
+.header > h1 > a,
+.header > nav > a:hover {
+  color: black;
+}
+
+.stream,
+.header > nav,
+.iframe > iframe {
+  position: absolute;
+}
+.stream,
+.articles > nav > ul > li > a {
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.stream > .controls > *,
+.articles > nav > ul > li > a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  font: 14px/20px -apple-system, arial, sans-serif;
+}
+
+code {
+  font-family: monospace;
+}
+
+footer {
+  color: rgba(0, 0, 0, .5);
+}
+
+html {
+  background: white;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+pre {
+  box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, .15);
+  background-color: rgba(0, 0, 0, .02);
+  padding: 10px 20px;
+  white-space: pre-wrap;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.album {
+  flex-wrap: wrap;
+}
+
+.article > div > h2 {
+  margin-left: 20px;
+}
+
+.article > footer {
+  font-size: 12px;
+}
+
+.articles > nav > ul {
+  align-items: center;
+  list-style: none;
+}
+
+.articles > nav > ul > li {
+  margin: 0 5px;
+}
+
+.articles > nav > ul > li > a {
+  display: inline-block;
+  padding: 3px 7px;
+  transition: background-color 200ms;
+}
+
+.articles > nav > ul > li > a:hover {
+  background-color: var(--blue);
+}
+
+.color1 {
+  color: var(--dark-violet);
+}
+
+.color2 {
+  color: var(--orange);
+}
+
+.color3 {
+  color: var(--red);
+}
+
+.color4 {
+  color: var(--purple);
+}
+
+.header {
+  padding-top: 20px;
+}
+
+.header a {
+  padding: 100px 0;
+}
+
+.header > h1 > a {
+  font-size: 42px;
+  text-shadow: 2px 2px 0 white, 3px 3px 0 rgba(0, 0, 0, .3);
+}
+
+.header > nav {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header > nav > a {
+  color: rgba(0, 0, 0, .3);
+  font-weight: bold;
+}
+
+.iframe {
+  background: center no-repeat;
+  background-size: contain;
+  padding-top: 56.25%;
+}
+
+.iframe > iframe:nth-child(1) {
+  height: 100%;
+  top: 0;
+  width: 100%;
+}
+
+.iframe > iframe:nth-child(2) {
+  height: 300px;
+  left: 20px;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 700px;
+}
+
+.line {
+  background-color: rgba(0, 0, 0, .125);
+  height: 1px;
+}
+
+.stream {
+  display: none;
+}
+
+.tac {
+  text-align: center;
+}
+
+.wrapper {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (min-width: 960px) {
+  .stream {
+    border-radius: 4px 4px 0 0;
+    bottom: 0;
+    display: block;
+    left: 50%;
+    padding-top: 20px;
+    transition: transform 200ms;
+  }
+
+  .stream.hidden {
+    transform: translate(-50%, calc(100% - 10px));
+  }
+
+  .stream > .chats > iframe {
+    height: 700px;
+    width: 380px;
+  }
+
+  .stream > .controls > *:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .stream > .controls > i {
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .stream,
+  .stream:hover {
+    transform: translate(-50%, 0);
+  }
+
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 920px;
+  }
+}

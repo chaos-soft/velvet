@@ -1,0 +1,8 @@
+beautifulsoup4
+coverage
+django
+django-debug-toolbar
+markdown
+mysqlclient
+requests
+youtube-dl

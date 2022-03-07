@@ -1,5 +1,5 @@
 'use strict'
-/* global init, Item, Items */
+/* global Item, Items, main */
 
 class Article extends Item {
   constructor () {
@@ -37,7 +37,7 @@ class Articles extends Items {
   }
 }
 
-init[0] = () => {
+main[0] = () => {
   const id = window.location.pathname.split('/')[5]
   if (id === 'change') {
     new Article().main()

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block description %}{{ object.get_intro }}{% endblock %}
-{% block script %}
+{% block meta %}
   {% if object.type == object.Type.STREAM %}
     <script src="/store/js/stream.js"></script>
   {% endif %}

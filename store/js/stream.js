@@ -1,46 +1,37 @@
 'use strict'
 
-class Panel {
+class Stream {
   constructor () {
     this.chat = document.getElementById('chat')
-    const controls = document.getElementsByClassName('controls')[0]
-    this.controls = controls.getElementsByTagName('a')
+    this.chats = document.getElementsByClassName('chats')[0]
     this.fullscreen = document.getElementById('fullscreen')
-    this.iframe = document.getElementsByClassName('iframe')[0]
+    this.panel = document.getElementsByClassName('panel')[0]
+    this.controls = this.panel.querySelectorAll('.controls > a')
     this.stream = document.getElementsByClassName('stream')[0]
-    this.chats = this.stream.children[1]
   }
 
   hide () {
     this.chat.classList.add('active')
     this.fullscreen.classList.add('active')
-    this.stream.classList.add('hidden')
+    this.panel.classList.add('hidden')
   }
 
   initControls () {
+    const elements = { chat: this.chats, player: this.stream }
     let isClick = true
     for (const a of this.controls) {
       a.addEventListener('click', (e) => {
-        if (a.classList.contains('chat')) {
+        if (a.classList.contains('chat') || a.classList.contains('player')) {
+          const element = a.classList.contains('chat') ? elements.chat : elements.player
           if (a.classList.contains('active')) {
-            this.chats.querySelector(`.${a.text}`).remove()
+            element.querySelector(`.${a.text}`).remove()
           } else {
             const iframe = `<iframe class="${a.text}" src="${a.href}"></iframe>`
-            this.chats.insertAdjacentHTML('beforeend', iframe)
+            element.insertAdjacentHTML('beforeend', iframe)
           }
           a.classList.toggle('active')
         } else if (a.classList.contains('image')) {
-          this.iframe.children[0].src = 'about:blank'
-          this.iframe.style.backgroundImage = `url(${a.href})`
-        } else if (a.classList.contains('miranda')) {
-          if (a.classList.contains('active')) {
-            this.iframe.children[1].src = 'about:blank'
-          } else {
-            this.iframe.children[1].src = a.href
-          }
-          a.classList.toggle('active')
-        } else if (a.classList.contains('player')) {
-          this.iframe.children[0].src = a.href
+          this.stream.style.backgroundImage = `url(${a.href})`
         }
         e.preventDefault()
       })
@@ -54,24 +45,18 @@ class Panel {
   main () {
     this.chat.addEventListener('click', () => {
       this.chat.classList.toggle('active')
-      this.stream.classList.toggle('hidden')
+      this.panel.classList.toggle('hidden')
     })
-    this.fullscreen.addEventListener('click', () => toggleFullscreen(this.iframe))
+    this.fullscreen.addEventListener('click', () => toggleFullscreen(this.stream))
     this.initControls()
+    this.resize()
   }
 
   show () {
     this.chat.classList.remove('active')
     this.fullscreen.classList.remove('active')
-    this.stream.classList.remove('hidden')
+    this.panel.classList.remove('hidden')
   }
-}
-
-let panel
-
-function init () {
-  panel = new Panel()
-  panel.main()
 }
 
 function toggleFullscreen (element) {
@@ -84,12 +69,18 @@ function toggleFullscreen (element) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => init())
+let stream
+
+document.addEventListener('DOMContentLoaded', () => {
+  stream = new Stream()
+  stream.main()
+})
 document.addEventListener('fullscreenchange', () => {
-  !document.fullscreenElement ? panel.show() : panel.hide()
+  !document.fullscreenElement ? stream.show() : stream.hide()
 })
 document.addEventListener('keyup', (e) => {
   if (e.code === 'KeyF') {
-    toggleFullscreen(panel.iframe)
+    toggleFullscreen(stream.stream)
   }
 })
+window.addEventListener('resize', () => stream.resize())

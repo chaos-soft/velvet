@@ -1,10 +1,8 @@
 from datetime import datetime
 
-from django.conf import settings
 from django.contrib.admin.sites import AdminSite
 from django.core.files.storage import default_storage
 from django.test import SimpleTestCase
-from django.utils.dateformat import format
 
 from .admin import BookmarkAdmin
 from . import forms
@@ -53,8 +51,7 @@ class BookmarksTest(SimpleTestCase):
         form = BookmarkForm(post, instance=self.bookmark2)
         self.assertTrue(form.is_valid())
         form.save(commit=False)
-        self.assertEqual(self.bookmark2.date,
-                         format(datetime.today(), settings.DATETIME_FORMAT))
+        self.assertEqual(self.bookmark2.date.date(), datetime.today().date())
         form = BookmarkForm({})
         self.assertFalse(form.is_valid())
         self.xtest_forms_xclean_screenshot(post)

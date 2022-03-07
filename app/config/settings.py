@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'bookmarks.apps.BookmarksConfig',
+    'finance.apps.FinanceConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,9 +115,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Moscow'
 
-# USE_I18N = True
+USE_I18N = False
 
-# USE_L10N = True
+USE_L10N = False
 
 # USE_TZ = True
 
@@ -126,7 +127,10 @@ TIME_ZONE = 'Europe/Moscow'
 
 STATIC_URL = '/static/'
 
+# Дата в blog.
 DATETIME_FORMAT = 'Y-m-d H:i:s'
+# Дата в finance.
+DATE_FORMAT = 'Y-m-d'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store/')
 MEDIA_URL = '/store/'

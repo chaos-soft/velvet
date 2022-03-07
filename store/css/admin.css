@@ -3,11 +3,6 @@ input[type=text] {
   width: 1024px;
 }
 
-:root {
-  --body-fg: black;
-  --body-quiet-color: black;
-}
-
 .field-images > div > label {
   float: none;
 }
@@ -30,4 +25,11 @@ input[type=text] {
 
 .field-images > div > textarea {
   display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --body-fg: black;
+    --body-quiet-color: black;
+  }
 }

@@ -1,8 +1,7 @@
 {% with code=object.get_code_configparser %}
-  <div class="iframe">
-    <iframe src="about:blank"></iframe>
-    <iframe src="about:blank"></iframe>
-    <div class="stream">
+  <div class="stream">
+    <div class="panel">
+      <div class="chats"></div>
       <div class="controls">
         {% for k, v in code.items %}
           {% if k == "gc" %}
@@ -11,9 +10,9 @@
             <a class="player" href="https://goodgame.ru/player?{{ v }}">{{ k }}</a>
           {% elif k == "i" %}
             <a class="image" href="{{ v }}">{{ k }}</a>
-          {% elif k == "m" %}
-            <a class="miranda" href="{{ v }}">{{ k }}</a>
-          {% elif k == "s" %}
+          {% elif k == "mc" %}
+            <a class="chat" href="{{ v }}">{{ k }}</a>
+          {% elif k == "sc" %}
             <a class="chat" href="https://sc2tv.ru/{{ v }}/chat">{{ k }}</a>
           {% elif k == "tc" %}
             <a class="chat" href="https://www.twitch.tv/embed/{{ v }}/chat?parent=localhost">{{ k }}</a>
@@ -24,7 +23,6 @@
         <i id="chat" class="material-icons" title="Показать, скрыть панель">chat</i>
         <i id="fullscreen" class="material-icons" title="Полноэкранный режим (f)">fullscreen</i>
       </div>
-      <div class="chats"></div>
     </div>
   </div>
 {% endwith %}

@@ -8,12 +8,28 @@ services:
       - '127.0.0.1:3306:3306'
     restart: unless-stopped
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ../velvet_data/mariadb:/var/lib/mysql
+  # search:
+  #   environment:
+  #     discovery.type: single-node
+  #     xpack.security.enabled: false
+  #   image: elasticsearch:7.17.3
+  #   mem_limit: 1073741824
+  #   ports:
+  #     - '127.0.0.1:9200:9200'
+  #   restart: unless-stopped
+  #   ulimits:
+  #     memlock:
+  #       hard: -1
+  #       soft: -1
+  #   volumes:
+  #     - ../velvet_data/search:/usr/share/elasticsearch/data
   velvet:
     build: .
     command: sh -c 'sleep 5 && python manage.py runserver 0.0.0.0:8000'
     depends_on:
       - db
+      # - search
     environment:
       DJANGO_SETTINGS_MODULE: config.settings_dev
     image: velvet:20210118

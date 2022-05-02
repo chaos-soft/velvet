@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'bookmarks.apps.BookmarksConfig',
     'finance.apps.FinanceConfig',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [
@@ -132,5 +133,6 @@ DATETIME_FORMAT = 'Y-m-d H:i:s'
 # Дата в finance.
 DATE_FORMAT = 'Y-m-d'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+ELASTICSEARCH_HOST = 'http://search:9200'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store/')
 MEDIA_URL = '/store/'

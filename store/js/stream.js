@@ -49,7 +49,6 @@ class Stream {
     })
     this.fullscreen.addEventListener('click', () => toggleFullscreen(this.stream))
     this.initControls()
-    this.resize()
   }
 
   show () {
@@ -83,4 +82,3 @@ document.addEventListener('keyup', (e) => {
     toggleFullscreen(stream.stream)
   }
 })
-window.addEventListener('resize', () => stream.resize())

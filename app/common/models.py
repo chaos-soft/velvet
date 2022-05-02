@@ -2,7 +2,7 @@ import json
 
 from django.db import models
 
-from .json_ import recursive_dump, recursive_load
+from .json_ import INSTANCE as json_
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -22,7 +22,7 @@ class Document(models.Model):
         self.images = []
         super().__init__(*args, **kwargs)
         if self.id:
-            self.document = recursive_load(self.document)
+            self.document = json_.load_recursive(self.document)
             for k in self.document:
                 if hasattr(self, k):
                     setattr(self, k, self.document[k])
@@ -30,5 +30,5 @@ class Document(models.Model):
                     raise KeyError
 
     def save(self, *args, **kwargs):
-        self.document = recursive_dump(self.document)
+        self.document = json_.dump_recursive(self.document)
         return super().save(*args, **kwargs)

@@ -38,8 +38,7 @@ footer,
 
 footer > p,
 .album > a,
-.panel > div > *,
-.panel > div {
+.panel > .controls > * {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -97,6 +96,7 @@ pre,
 .articles > nav > ul > li > a,
 .panel > .controls > * {
   color: white;
+  cursor: pointer;
 }
 
 .color5,
@@ -253,13 +253,19 @@ strong {
   display: none;
 }
 
-.stream {
-  background: center no-repeat black;
-  background-size: contain;
-  height: 860px;
+.panel > .chats {
+  justify-content: normal;
+  overflow-x: auto;
+  padding-top: 20px;
 }
 
-.stream > iframe {
+.stream {
+  background: top center no-repeat black;
+  background-size: contain;
+  height: 100vh;
+}
+
+.stream iframe {
   flex: 1 1 auto;
 }
 
@@ -272,14 +278,14 @@ strong {
   padding-right: 10px;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 600px) {
   .panel {
     border-radius: 4px 4px 0 0;
     bottom: 0;
     display: block;
     left: 50%;
-    padding-top: 20px;
     transition: transform 200ms;
+    width: 100%;
   }
 
   .panel.hidden {
@@ -288,7 +294,7 @@ strong {
 
   .panel > .chats > iframe {
     height: 700px;
-    width: 380px;
+    min-width: 50%;
   }
 
   .panel > .controls > *:not(:last-child) {
@@ -296,7 +302,6 @@ strong {
   }
 
   .panel > .controls > i {
-    cursor: pointer;
     font-size: 24px;
   }
 
@@ -305,9 +310,39 @@ strong {
     transform: translate(-50%, 0);
   }
 
+  .stream > iframe {
+    height: 37%;
+  }
+
   .wrapper {
     margin-left: auto;
     margin-right: auto;
     max-width: 920px;
+  }
+}
+
+@media (min-width: 960px) {
+  .panel > div > *,
+  .panel > div {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .panel {
+    width: auto;
+  }
+
+  .panel > .chats > iframe {
+    height: 700px;
+    min-width: 380px;
+  }
+
+  .stream {
+    background-position: center;
+    height: 860px;
+  }
+
+  .stream > iframe {
+    height: auto;
   }
 }

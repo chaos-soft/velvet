@@ -1,3 +1,4 @@
+from datetime import datetime
 import configparser
 
 from common.models import Document
@@ -40,13 +41,13 @@ class Article(Document):
     def get_absolute_url(self):
         return reverse('article', args=[self.id])
 
-    def get_code_configparser(self):
-        config = configparser.ConfigParser()
-        config.read_string(f'[6bb]\r\n{self.code}')
-        return config['6bb']
-
-    def get_code_csv(self):
-        return self.code.replace('\r\n', ',')
+    def get_code(self):
+        if self.type == Article.Type.YOUTUBE:
+            return self.code.replace('\r\n', ',')
+        elif self.type == Article.Type.STREAM:
+            config = configparser.ConfigParser()
+            config.read_string(f'[6bb]\r\n{self.code}')
+            return config['6bb']
 
     def get_content(self):
         commands = []
@@ -75,3 +76,9 @@ class Article(Document):
 
     def get_intro(self):
         return self.content.split('\r\n', 1)[0]
+
+    def get_types_dump(self):
+        return {'date_modified': str}
+
+    def get_types_load(self):
+        return {'date_modified': datetime.fromisoformat}

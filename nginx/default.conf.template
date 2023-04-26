@@ -1,0 +1,56 @@
+server {
+    add_header 'Access-Control-Allow-Origin' '*';
+    rewrite ^/(.*)/$ /$1 permanent;
+    root /velvet/store;
+    server_tokens off;
+
+    keepalive_timeout   70;
+    listen              443 ssl;
+    ssl_certificate     /etc/letsencrypt/live/57st.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/57st.net/privkey.pem;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_session_cache   shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    location / {
+        root /velvet/store/out;
+    }
+
+    location /.well-known/ {
+    }
+
+    location /api/articles {
+        # add_header arg_page $arg_page;
+        try_files $uri /api/pages/$arg_page.json =404;
+    }
+
+    location /api/articles/ {
+        expires 5m;
+        try_files $uri $uri.json =404;
+    }
+
+    location /articles/ {
+        try_files $uri /out/articles/[id].html =404;
+    }
+
+    location /miranda {
+        proxy_http_version 1.1;
+        proxy_pass http://91.201.40.128:55555/;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Upgrade $http_upgrade;
+    }
+
+    location /robots.txt {
+    }
+
+    location /store/ {
+        root /velvet;
+    }
+}
+
+server {
+    listen 80;
+    return 301 https://$host$request_uri;
+    server_tokens off;
+}

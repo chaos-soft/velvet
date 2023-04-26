@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
     'blog.apps.BlogConfig',
     'bookmarks.apps.BookmarksConfig',
     'finance.apps.FinanceConfig',
-    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,11 +130,15 @@ USE_L10N = False
 
 STATIC_URL = '/static/'
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 # Дата в blog.
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 # Дата в finance.
 DATE_FORMAT = 'Y-m-d'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-ELASTICSEARCH_HOST = 'http://search:9200'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store/')
 MEDIA_URL = '/store/'
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}

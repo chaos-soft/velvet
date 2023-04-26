@@ -1,4 +1,4 @@
-{% with code=object.get_code_configparser %}
+{% with code=object.get_code %}
   <div class="stream">
     <div class="panel">
       <div class="chats"></div>
@@ -18,6 +18,10 @@
             <a class="chat" href="https://www.twitch.tv/embed/{{ v }}/chat?parent=localhost">{{ k }}</a>
           {% elif k == "tp" %}
             <a class="player" href="https://player.twitch.tv/?channel={{ v }}&parent=localhost">{{ k }}</a>
+          {% elif k == "yc" %}
+            <a class="chat" href="https://www.youtube.com/live_chat?v={{ v }}&embed_domain=localhost">{{ k }}</a>
+          {% elif k == "yp" %}
+            <a class="player" href="https://www.youtube-nocookie.com/embed/{{ v }}">{{ k }}</a>
           {% endif %}
         {% endfor %}
         <i id="chat" class="material-icons" title="Показать, скрыть панель">chat</i>

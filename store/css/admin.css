@@ -3,27 +3,27 @@ input[type=text] {
   width: 1024px;
 }
 
-.field-images > div > label {
+:root {
+  --font-family-primary: 'helvetica neue';
+}
+
+.field-images > div > div > label {
   float: none;
 }
-
-.field-images > div > p {
+.field-images > div > div > p {
   text-align: center;
 }
-
-.field-images > div > p > img {
+.field-images > div > div > p > img {
   border: 5px solid rgba(0, 0, 0, .14);
   border-radius: 4px;
   cursor: pointer;
   margin: 3px;
   transition: border-color 200ms;
 }
-
-.field-images > div > p > img.selected {
+.field-images > div > div > p > img.selected {
   border-color: rgba(255, 0, 0, .5);
 }
-
-.field-images > div > textarea {
+.field-images > div > div > textarea {
   display: none;
 }
 

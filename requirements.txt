@@ -1,10 +1,10 @@
-beautifulsoup4==4.11.1
-coverage==6.5.0
-django-cors-headers==3.13.0
-django-debug-toolbar==3.8.1
-django==4.1.4
+-e git+https://github.com/ytdl-org/youtube-dl.git@211cbfd5d46025a8e4d8f9f3d424aaada4698974#egg=youtube_dl
+beautifulsoup4==4.12.2
+coverage==7.2.3
+django-cors-headers==3.14.0
+django-debug-toolbar==4.0.0
+django==4.2
 djangorestframework==3.14.0
-markdown==3.4.1
+markdown==3.4.3
 mysqlclient==2.1.1
-requests==2.28.1
-youtube-dl==2021.12.17
+requests==2.29.0

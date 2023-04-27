@@ -17,7 +17,7 @@ services:
       - db
     environment:
       DJANGO_SETTINGS_MODULE: config.settings_dev
-    image: velvet:20230321
+    image: velvet:20230427
     ports:
       - '0.0.0.0:80:8000'
     restart: unless-stopped

@@ -24,9 +24,10 @@ class BlogTest(SimpleTestCase):
         })
 
         self.article3 = Article()
-        self.article3.content = 'mif\r\nbn8'
         self.article3.code = 'ksu\r\nete'
+        self.article3.content = 'mif\r\nbn8'
         self.article3.images = ['3j5', 'mls', '1dc']
+        self.article3.type = Article.Type.YOUTUBE
 
     def test_admin(self):
         admin = ArticleAdmin(Article, AdminSite)
@@ -52,7 +53,7 @@ class BlogTest(SimpleTestCase):
     def test_models(self):
         self.assertEqual(str(self.article1), '6wo')
         self.assertEqual(str(self.article2), 'csf')
-        self.assertEqual(self.article3.get_code_csv(), 'ksu,ete')
+        self.assertEqual(self.article3.get_code(), 'ksu,ete')
         self.assertEqual(self.article3.get_intro(), 'mif')
 
     def test_signals(self):

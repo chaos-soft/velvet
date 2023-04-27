@@ -1,14 +1,8 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
 from rest_framework import viewsets, mixins
 
 from .models import Article
 from .serializers import ArticleSerializer
-
-
-class ArticlesView(ListView):
-    http_method_names = ['get']
-    paginate_by = 10
-    queryset = Article.objects.filter(is_published=True)
 
 
 class ArticlesViewSet(
@@ -25,11 +19,8 @@ class ArticlesViewSet(
         return self.queryset
 
 
-class ArticleView(DetailView):
+class SitemapView(ListView):
     http_method_names = ['get']
-    model = Article
-
-
-class SitemapView(ArticlesView):
     paginate_by = 50000
+    queryset = Article.objects.filter(is_published=True)
     template_name = 'blog/sitemap.html'

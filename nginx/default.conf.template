@@ -1,5 +1,6 @@
 server {
     add_header 'Access-Control-Allow-Origin' '*';
+    charset utf-8;
     rewrite ^/(.*)/$ /$1 permanent;
     root /velvet/store;
     server_tokens off;

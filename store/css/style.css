@@ -26,7 +26,7 @@ body,
   color: black;
 }
 
-footer,
+body > div > footer,
 .album,
 .articles > nav > ul,
 .panel > .chats,
@@ -293,7 +293,7 @@ strong {
   }
 
   .panel > .chats > iframe {
-    height: 700px;
+    height: 620px;
     min-width: 50%;
   }
 

@@ -3,7 +3,6 @@ import configparser
 
 from common.models import Document
 from django.db import models
-from django.urls import reverse
 import markdown
 
 
@@ -18,6 +17,7 @@ class Article(Document):
     code = ''
     status = ''
     date_modified = ''
+    is_content = False
 
     class Meta:
         ordering = ['-date']
@@ -38,9 +38,6 @@ class Article(Document):
     def command_replace(self, values):
         self.content = self.content.replace(*values)
 
-    def get_absolute_url(self):
-        return reverse('article', args=[self.id])
-
     def get_code(self):
         if self.type == Article.Type.YOUTUBE:
             return self.code.replace('\r\n', ',')
@@ -50,6 +47,9 @@ class Article(Document):
             return config['6bb']
 
     def get_content(self):
+        if self.is_content:
+            return self.content
+        self.is_content = True
         commands = []
         strings = self.content.split('\r\n')
         while True:

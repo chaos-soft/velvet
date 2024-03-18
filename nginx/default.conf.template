@@ -1,7 +1,6 @@
 server {
     add_header 'Access-Control-Allow-Origin' '*';
     charset utf-8;
-    rewrite ^/(.*)/$ /$1 permanent;
     root /velvet/store;
     server_tokens off;
 
@@ -16,23 +15,12 @@ server {
 
     location / {
         root /velvet/store/out;
-    }
-
-    location /.well-known/ {
-    }
-
-    location /api/articles {
-        # add_header arg_page $arg_page;
-        try_files $uri /api/pages/$arg_page.json =404;
+        try_files $uri $uri.html $uri/ =404;
     }
 
     location /api/articles/ {
         expires 5m;
         try_files $uri $uri.json =404;
-    }
-
-    location /articles/ {
-        try_files $uri /out/articles/[id].html =404;
     }
 
     location /miranda {
@@ -42,11 +30,28 @@ server {
         proxy_set_header Upgrade $http_upgrade;
     }
 
-    location /robots.txt {
-    }
-
     location /store/ {
         root /velvet;
+    }
+
+    location = /api/articles {
+        # add_header arg_page $arg_page;
+        try_files $uri /api/pages/$arg_page.json =404;
+    }
+
+    location = /c {
+        return 302 /articles/57;
+    }
+
+    location ~ ^/(robots.txt|.well-known/|sitemap.xml) {
+    }
+
+    location ~ ^/articles/\d+$ {
+        try_files $uri /out/articles/[id].html =404;
+    }
+
+    location ~ ^/slideshow/\d+$ {
+        try_files $uri /out/slideshow/[id].html =404;
     }
 }
 

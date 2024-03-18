@@ -1,10 +1,18 @@
+import json
+
 from django.db import models
 
 from .tipizator import INSTANCE as tipizator
 
 
+class JSONEncoder(json.JSONEncoder):
+    def __init__(self, *args, **kwargs):
+        kwargs['ensure_ascii'] = False
+        super().__init__(*args, **kwargs)
+
+
 class Document(models.Model):
-    document = models.JSONField(default=dict)
+    document = models.JSONField(encoder=JSONEncoder, default=dict)
     images: list[str] = list()
 
     class Meta:

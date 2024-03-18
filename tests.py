@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+import sys
+
 import requests
 
 
-def main() -> None:
+def main() -> int:
     r = requests.get('http://57st.net')
     assert r.status_code == 200
     assert r.headers['content-type'] == 'text/html'
@@ -39,6 +41,8 @@ def main() -> None:
     assert r.status_code == 200
     assert r.headers['content-type'] == 'text/xml'
 
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

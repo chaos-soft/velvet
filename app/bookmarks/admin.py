@@ -19,7 +19,7 @@ class BookmarkAdmin(DocumentAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        return queryset.prefetch_related('category__parent')
+        return queryset.select_related('category__parent')
 
     def title(self, obj):
         links = [(obj.urls[0], obj)]

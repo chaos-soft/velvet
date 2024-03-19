@@ -47,7 +47,7 @@ class Items {
   }
 }
 
-const init = [
+const main = [
   () => {
     const id = window.location.pathname.split('/')[5]
     if (id === 'change') {
@@ -58,7 +58,7 @@ const init = [
   }
 ]
 document.addEventListener('DOMContentLoaded', () => {
-  for (const v of init) {
+  for (const v of main) {
     v()
   }
 })

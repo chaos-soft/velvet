@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from common.models import Document
 from django.db import models
 
@@ -5,18 +7,20 @@ from django.db import models
 class Bookmark(Document):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     title = ''
-    urls = None
+    urls: list[str] = list()
     date = ''
 
     class Meta:
         ordering = ['-id']
 
-    def __init__(self, *args, **kwargs):
-        self.urls = []
-        super().__init__(*args, **kwargs)
-
     def __str__(self):
         return self.title
+
+    def get_types_dump(self):
+        return {'date': str}
+
+    def get_types_load(self):
+        return {'date': datetime.fromisoformat}
 
 
 class Category(models.Model):

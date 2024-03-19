@@ -12,7 +12,7 @@ DATETIME_FORMAT = '%Y%m%d-%H%M%S'
 
 def create_thumbnail(name, size='20000x440>'):
     args = ['convert', default_storage.path(name), '-gravity', 'center', '-thumbnail', size]
-    if name[-4:].lower() in ['.jpg', 'jpeg']:
+    if name[-3:] == 'jpg':
         args += ['-quality', '85']
     args += ['{path}']
     return subprocess_run(f'thumbnails/{name}', args)
@@ -20,6 +20,11 @@ def create_thumbnail(name, size='20000x440>'):
 
 def delete_thumbnail(name):
     default_storage.delete(f'thumbnails/{name}')
+
+
+def get_extensions(path):
+    output = subprocess.run(['file', '-b', '--extension', path], capture_output=True, text=True)
+    return output.stdout.rstrip('\n')
 
 
 def get_html_title(url):

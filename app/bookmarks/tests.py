@@ -1,10 +1,8 @@
 from datetime import datetime
 
-from django.conf import settings
 from django.contrib.admin.sites import AdminSite
 from django.core.files.storage import default_storage
 from django.test import SimpleTestCase
-from django.utils.dateformat import format
 
 from .admin import BookmarkAdmin
 from . import forms
@@ -42,19 +40,18 @@ class BookmarksTest(SimpleTestCase):
         self.assertEqual(admin.get_category(self.bookmark2), 'q0t')
 
     def test_forms(self):
-        post = {'urls': 'https://57st.net/articles/125\r\nv5i'}
+        post = {'urls': 'https://57st.net\r\nv5i'}
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertEqual(form.initial['urls'], 'hda\r\nn0k')
         self.assertTrue(form.is_valid())
         form.save(commit=False)
-        self.assertEqual(self.bookmark1.urls, ['https://57st.net/articles/125', 'v5i'])
-        self.assertEqual(self.bookmark1.title, 'Retrowave')
+        self.assertEqual(self.bookmark1.urls, ['https://57st.net', 'v5i'])
+        self.assertEqual(self.bookmark1.title, '57 Street — статьи, стримы и всякое')
         post['title'] = 'poh'
         form = BookmarkForm(post, instance=self.bookmark2)
         self.assertTrue(form.is_valid())
         form.save(commit=False)
-        self.assertEqual(self.bookmark2.date,
-                         format(datetime.today(), settings.DATETIME_FORMAT))
+        self.assertEqual(self.bookmark2.date.date(), datetime.today().date())
         form = BookmarkForm({})
         self.assertFalse(form.is_valid())
         self.xtest_forms_xclean_screenshot(post)

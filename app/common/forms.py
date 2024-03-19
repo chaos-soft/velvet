@@ -1,8 +1,11 @@
 from datetime import date
+from pathlib import Path
 
 from django import forms
 from django.core.exceptions import FieldDoesNotExist
 from django.core.files.storage import default_storage
+
+from .functions import get_extensions
 
 
 class DocumentForm(forms.ModelForm):
@@ -48,7 +51,14 @@ class DocumentForm(forms.ModelForm):
         return super().save(*args, **kwargs)
 
     def upload_image(self, image):
-        name = f'{date.today().strftime(self.UPLOAD_TO)}{image.name}'
+        converter = {
+            'jpeg/jpg/jpe/jfif': 'jpg',
+            'png': 'png',
+        }
+        ext = converter.get(get_extensions(image.temporary_file_path()))
+        if ext not in ['jpg', 'png']:
+            raise forms.ValidationError({'images_upload': 'Загружать можно только JPEG или PNG.'}, code='invalid')
+        name = f'{date.today().strftime(self.UPLOAD_TO)}{Path(image.name).with_suffix(f'.{ext}')}'
         # The actual name of the stored file will be returned.
         name = default_storage.save(name, image)
         self.cleaned_data['images'] += [name]

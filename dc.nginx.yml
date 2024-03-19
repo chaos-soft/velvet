@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:1.23
+    ports:
+      - '443:443'
+      - '80:80'
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./nginx:/etc/nginx/templates:ro
+      - ./store:/velvet/store:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro

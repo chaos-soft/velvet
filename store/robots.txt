@@ -1,0 +1,2 @@
+Sitemap: https://57st.net/store/sitemap.xml
+User-agent: *

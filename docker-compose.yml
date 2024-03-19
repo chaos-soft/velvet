@@ -2,23 +2,24 @@ version: '3'
 services:
   db:
     environment:
+      MYSQL_DATABASE: velvet
       MYSQL_ROOT_PASSWORD: root
     image: mariadb:10
     ports:
       - '127.0.0.1:3306:3306'
     restart: unless-stopped
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ../velvet_db:/var/lib/mysql
   velvet:
     build: .
-    command: sh -c 'sleep 5 && python manage.py runserver 0.0.0.0:8000'
+    command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     environment:
       DJANGO_SETTINGS_MODULE: config.settings_dev
-    image: velvet:20210118
+    image: velvet:20240318
     ports:
-      - '127.0.0.1:80:8000'
+      - '0.0.0.0:80:8000'
     restart: unless-stopped
     stdin_open: true
     stop_signal: SIGINT

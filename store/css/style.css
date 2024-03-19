@@ -9,30 +9,36 @@
 }
 
 a,
-.stream > .controls > .active {
+.panel > .controls > .active {
   color: var(--blue);
 }
 
 a,
+.articles > nav > ul > li > a:hover,
 .header > h1 > a:hover,
-.header > nav > a:hover,
-.articles > nav > ul > li > a:hover {
+.header > nav > a:hover {
   text-decoration: none;
 }
 
-footer,
+body,
+.header > h1 > a,
+.header > nav > a:hover {
+  color: black;
+}
+
+body > div > footer,
 .album,
 .articles > nav > ul,
-.stream > .chats,
-.stream > .controls {
+.panel > .chats,
+.panel > .controls,
+.stream {
   display: flex;
   justify-content: center;
 }
 
 footer > p,
 .album > a,
-.stream > div,
-.stream > div > * {
+.panel > .controls > * {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -40,12 +46,6 @@ footer > p,
 h1,
 h2 {
   font: 20px/1 lobster, cursive;
-}
-
-main,
-.mb40,
-.articles > article {
-  margin-bottom: 40px;
 }
 
 h1,
@@ -57,18 +57,25 @@ ul,
 .album > a,
 .iframe,
 .mb20,
-.stream > div > * {
+.panel > div > *,
+.stream {
   margin-bottom: 20px;
+}
+
+main,
+.articles > article,
+.mb40 {
+  margin-bottom: 40px;
+}
+
+ol,
+ul {
+  list-style-position: inside;
 }
 
 pre,
 .articles > nav > ul > li > a {
   border-radius: 4px;
-}
-
-ul,
-ol {
-  list-style-position: inside;
 }
 
 .album > a > img,
@@ -79,6 +86,17 @@ ol {
 .article > h1,
 .error > h1 {
   font-size: 26px;
+}
+
+.articles > nav > ul > li > a,
+.panel {
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.articles > nav > ul > li > a,
+.panel > .controls > * {
+  color: white;
+  cursor: pointer;
 }
 
 .color5,
@@ -92,35 +110,21 @@ ol {
 }
 
 .header,
-.iframe {
+.iframe,
+.stream {
   overflow: hidden;
   position: relative;
 }
 
-.header a,
-.header > h1 > a > span {
+.header > h1 > a > span,
+.header a {
   transition: color 200ms;
 }
 
-body,
-.header > h1 > a,
-.header > nav > a:hover {
-  color: black;
-}
-
-.stream,
 .header > nav,
-.iframe > iframe {
+.iframe > iframe,
+.panel {
   position: absolute;
-}
-.stream,
-.articles > nav > ul > li > a {
-  background-color: rgba(0, 0, 0, .7);
-}
-
-.stream > .controls > *,
-.articles > nav > ul > li > a {
-  color: white;
 }
 
 a:hover {
@@ -149,8 +153,8 @@ img {
 }
 
 pre {
-  box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, .15);
   background-color: rgba(0, 0, 0, .02);
+  box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, .15);
   padding: 10px 20px;
   white-space: pre-wrap;
 }
@@ -210,10 +214,6 @@ strong {
   padding-top: 20px;
 }
 
-.header a {
-  padding: 100px 0;
-}
-
 .header > h1 > a {
   font-size: 42px;
   text-shadow: 2px 2px 0 white, 3px 3px 0 rgba(0, 0, 0, .3);
@@ -230,24 +230,18 @@ strong {
   font-weight: bold;
 }
 
+.header a {
+  padding: 100px 0;
+}
+
 .iframe {
-  background: center no-repeat;
-  background-size: contain;
   padding-top: 56.25%;
 }
 
-.iframe > iframe:nth-child(1) {
+.iframe > iframe {
   height: 100%;
   top: 0;
   width: 100%;
-}
-
-.iframe > iframe:nth-child(2) {
-  height: 300px;
-  left: 20px;
-  top: 50%;
-  transform: translate(0, -50%);
-  width: 700px;
 }
 
 .line {
@@ -255,8 +249,24 @@ strong {
   height: 1px;
 }
 
-.stream {
+.panel {
   display: none;
+}
+
+.panel > .chats {
+  justify-content: normal;
+  overflow-x: auto;
+  padding-top: 20px;
+}
+
+.stream {
+  background: top center no-repeat black;
+  background-size: contain;
+  height: 100vh;
+}
+
+.stream iframe {
+  flex: 1 1 auto;
 }
 
 .tac {
@@ -268,42 +278,71 @@ strong {
   padding-right: 10px;
 }
 
-@media (min-width: 960px) {
-  .stream {
+@media (min-width: 600px) {
+  .panel {
     border-radius: 4px 4px 0 0;
     bottom: 0;
     display: block;
     left: 50%;
-    padding-top: 20px;
     transition: transform 200ms;
+    width: 100%;
   }
 
-  .stream.hidden {
-    transform: translate(-50%, calc(100% - 10px));
+  .panel.hidden {
+    transform: translate(-50%, calc(100% - 5px));
   }
 
-  .stream > .chats > iframe {
-    height: 700px;
-    width: 380px;
+  .panel > .chats > iframe {
+    height: 620px;
+    min-width: 50%;
   }
 
-  .stream > .controls > *:not(:last-child) {
+  .panel > .controls > *:not(:last-child) {
     margin-right: 0;
   }
 
-  .stream > .controls > i {
-    cursor: pointer;
+  .panel > .controls > i {
     font-size: 24px;
   }
 
-  .stream,
-  .stream:hover {
+  .panel,
+  .panel:hover {
     transform: translate(-50%, 0);
+  }
+
+  .stream > iframe {
+    height: 37%;
   }
 
   .wrapper {
     margin-left: auto;
     margin-right: auto;
     max-width: 920px;
+  }
+}
+
+@media (min-width: 960px) {
+  .panel > div > *,
+  .panel > div {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .panel {
+    width: auto;
+  }
+
+  .panel > .chats > iframe {
+    height: 700px;
+    min-width: 380px;
+  }
+
+  .stream {
+    background-position: center;
+    height: 860px;
+  }
+
+  .stream > iframe {
+    height: auto;
   }
 }

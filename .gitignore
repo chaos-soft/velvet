@@ -128,11 +128,17 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+**/store/.well-known/
+**/store/api/
 **/store/blog/
 **/store/bookmarks/
+**/store/css/xxx.css
 **/store/files/
-**/store/html/
 **/store/images/
+**/store/js/metrika.js
+**/store/miranda/
+**/store/out/
+**/store/sitemap.xml
 **/store/thumbnails/
+/backup.json
 /LOG
-/mariadb/

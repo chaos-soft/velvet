@@ -1,8 +1,8 @@
+from datetime import datetime
 import configparser
 
 from common.models import Document
 from django.db import models
-from django.urls import reverse
 import markdown
 
 
@@ -17,6 +17,7 @@ class Article(Document):
     code = ''
     status = ''
     date_modified = ''
+    is_content = False
 
     class Meta:
         ordering = ['-date']
@@ -37,18 +38,18 @@ class Article(Document):
     def command_replace(self, values):
         self.content = self.content.replace(*values)
 
-    def get_absolute_url(self):
-        return reverse('article', args=[self.id])
-
-    def get_code_configparser(self):
-        config = configparser.ConfigParser()
-        config.read_string(f'[6bb]\r\n{self.code}')
-        return config['6bb']
-
-    def get_code_csv(self):
-        return self.code.replace('\r\n', ',')
+    def get_code(self):
+        if self.type == Article.Type.YOUTUBE:
+            return self.code.replace('\r\n', ',')
+        elif self.type == Article.Type.STREAM:
+            config = configparser.ConfigParser()
+            config.read_string(f'[6bb]\r\n{self.code}')
+            return config['6bb']
 
     def get_content(self):
+        if self.is_content:
+            return self.content
+        self.is_content = True
         commands = []
         strings = self.content.split('\r\n')
         while True:
@@ -75,3 +76,9 @@ class Article(Document):
 
     def get_intro(self):
         return self.content.split('\r\n', 1)[0]
+
+    def get_types_dump(self):
+        return {'date_modified': str}
+
+    def get_types_load(self):
+        return {'date_modified': datetime.fromisoformat}

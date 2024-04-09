@@ -1,13 +1,26 @@
 from django.contrib.admin.sites import AdminSite
 from django.core.files.storage import default_storage
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.uploadedfile import SimpleUploadedFile, TemporaryUploadedFile
 from django.test import SimpleTestCase
+from django.urls import reverse
 from django.utils.datastructures import MultiValueDict
+from rest_framework import status
+from rest_framework.test import APITestCase
 
 from .admin import ArticleAdmin
 from .forms import ArticleForm
 from .models import Article
 from .signals import post_delete
+
+
+class BlogAPITest(APITestCase):
+    def test_api(self):
+        r = self.client.get(reverse('articles-list'))
+        self.assertEqual(r.data['count'], 0)
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
+
+        r = self.client.get(reverse('articles-detail', kwargs={'pk': 1}))
+        self.assertEqual(r.status_code, status.HTTP_404_NOT_FOUND)
 
 
 class BlogTest(SimpleTestCase):
@@ -36,8 +49,7 @@ class BlogTest(SimpleTestCase):
         self.assertEqual(admin.images(self.article3), '/store/thumbnails/1dc')
         self.assertEqual(admin.type(self.article1), Article.Type.ARTICLE.label)
         self.assertEqual(admin.type(self.article2), Article.Type.YOUTUBE.label)
-        self.assertEqual(admin.get_is_comments(self.article1),
-                         '<img src="/static/admin/img/icon-no.svg">')
+        self.assertEqual(admin.get_is_comments(self.article1), '<img src="/static/admin/img/icon-no.svg">')
 
     def test_forms(self):
         post = {
@@ -79,13 +91,16 @@ class BlogTest(SimpleTestCase):
         self.assertFalse(default_storage.exists(f'thumbnails/{name}'))
 
     def xtest_forms_upload_image(self, post):
-        with open(default_storage.path('images/ariel_09328_1.jpg'), 'rb') as f:
-            files = MultiValueDict(
-                {'images_upload': [SimpleUploadedFile('ariel_09328_1.jpg', f.read())]})
-        form = ArticleForm(post, files, instance=self.article3)
-        self.assertTrue(form.is_valid())
-        form.save(commit=False)
-        self.assertEqual(len(self.article3.images), 4)
-        name = self.article3.images[-1]
-        self.assertTrue(default_storage.exists(name))
-        self.assertTrue(default_storage.exists(f'thumbnails/{name}'))
+        with (
+            open(default_storage.path('images/ariel_09328_1.jpg'), 'rb') as f1,
+            TemporaryUploadedFile('guk.txt', 'text/plain', 12345, 'utf8') as f2,
+        ):
+            f2.write(f1.read())
+            files = MultiValueDict({'images_upload': [f2]})
+            form = ArticleForm(post, files, instance=self.article3)
+            self.assertTrue(form.is_valid())
+            form.save(commit=False)
+            self.assertEqual(len(self.article3.images), 4)
+            name = self.article3.images[-1]
+            self.assertTrue(default_storage.exists(name))
+            self.assertTrue(default_storage.exists(f'thumbnails/{name}'))

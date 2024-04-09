@@ -34,19 +34,18 @@ class BookmarksTest(SimpleTestCase):
 
     def test_admin(self):
         admin = BookmarkAdmin(Bookmark, AdminSite)
-        self.assertEqual(admin.title(self.bookmark1),
-                         '<a href="hda">c5j</a><br><a href="n0k">02</a>')
+        self.assertEqual(admin.title(self.bookmark1), '<a href="hda">c5j</a><br><a href="n0k">02</a>')
         self.assertEqual(admin.get_category(self.bookmark1), 'q0t/haokx9')
         self.assertEqual(admin.get_category(self.bookmark2), 'q0t')
 
     def test_forms(self):
-        post = {'urls': 'https://57st.net\r\nv5i'}
+        post = {'urls': 'https://www.kindgirls.com/gallery.php?id=2737\r\nv5i'}
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertEqual(form.initial['urls'], 'hda\r\nn0k')
         self.assertTrue(form.is_valid())
         form.save(commit=False)
-        self.assertEqual(self.bookmark1.urls, ['https://57st.net', 'v5i'])
-        self.assertEqual(self.bookmark1.title, '57 Street — статьи, стримы и всякое')
+        self.assertEqual(self.bookmark1.urls, ['https://www.kindgirls.com/gallery.php?id=2737', 'v5i'])
+        self.assertEqual(self.bookmark1.title, 'Linda D nude in 20 photos from Met-Art')
         post['title'] = 'poh'
         form = BookmarkForm(post, instance=self.bookmark2)
         self.assertTrue(form.is_valid())

@@ -1,6 +1,7 @@
 server {
     add_header 'Access-Control-Allow-Origin' '*';
     charset utf-8;
+    listen 80;
     root /velvet/store;
     server_tokens off;
 
@@ -53,10 +54,4 @@ server {
     location ~ ^/slideshow/\d+$ {
         try_files $uri /out/slideshow/[id].html =404;
     }
-}
-
-server {
-    listen 80;
-    return 301 https://$host$request_uri;
-    server_tokens off;
 }

@@ -2,7 +2,7 @@ import json
 
 from django.db import models
 
-from .tipizator import INSTANCE as tipizator
+from .tipizator import Tipizator
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -22,7 +22,7 @@ class Document(models.Model):
         super().__init__(*args, **kwargs)
         if self.id:
             if hasattr(self, 'get_types_load'):
-                tipizator.types_load = self.get_types_load()
+                tipizator = Tipizator(types_load=self.get_types_load())
                 self.document = tipizator.load(self.document)
             for k in self.document:
                 if hasattr(self, k):
@@ -32,6 +32,6 @@ class Document(models.Model):
 
     def save(self, *args, **kwargs):
         if hasattr(self, 'get_types_dump'):
-            tipizator.types_dump = self.get_types_dump()
+            tipizator = Tipizator(types_dump=self.get_types_dump())
             self.document = tipizator.dump(self.document)
         return super().save(*args, **kwargs)

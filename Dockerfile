@@ -6,7 +6,9 @@ RUN apt-get update; \
     apt-get install -y --no-install-recommends \
         build-essential \
         default-libmysqlclient-dev \
+        file \
         git \
+        imagemagick \
         pkg-config \
         wkhtmltopdf; \
     \

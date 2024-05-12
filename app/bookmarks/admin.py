@@ -1,4 +1,4 @@
-from common.admin import DocumentAdmin
+from common.admin import Admin
 from django.contrib import admin
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
@@ -7,10 +7,11 @@ from .forms import BookmarkForm, CategoryForm
 from .models import Bookmark, Category
 
 
-class BookmarkAdmin(DocumentAdmin):
+class BookmarkAdmin(Admin):
     form = BookmarkForm
-    list_display = ['id', 'title', 'images', 'get_category', 'date']
+    list_display = ['id', 'get_title', 'images', 'get_category', 'date', 'date_modified']
     list_filter = ['category']
+    search_fields = ['id', 'title', 'urls']
 
     def get_category(self, obj):
         if obj.category.parent_id:
@@ -21,9 +22,10 @@ class BookmarkAdmin(DocumentAdmin):
         queryset = super().get_queryset(request)
         return queryset.select_related('category__parent')
 
-    def title(self, obj):
-        links = [(obj.urls[0], obj)]
-        for i, url in enumerate(obj.urls[1:]):
+    def get_title(self, obj):
+        urls = obj.urls.split('\r\n')
+        links = [(urls[0], obj)]
+        for i, url in enumerate(urls[1:]):
             links += [(url, str(i + 2).zfill(2))]
         return format_html_join(mark_safe('<br>'), '<a href="{}">{}</a>', links)
 

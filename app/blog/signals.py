@@ -4,7 +4,7 @@ from django.db.models import signals
 
 
 def post_delete(instance, **kwargs):
-    for name in instance.images:
+    for name in instance.images_list:
         default_storage.delete(name)
         delete_thumbnail(name)
 

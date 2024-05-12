@@ -1,32 +1,31 @@
-from datetime import datetime
 import configparser
 
-from common.models import Document
+from common.models import Model
 from django.db import models
 import markdown
 
 
-class Article(Document):
-    date = models.DateTimeField(auto_now_add=True)
-    is_published = models.BooleanField(default=True)
-    title = ''
-    content = ''
-    is_comments = False
-    type = 0
-    cover = ''
-    code = ''
-    status = ''
-    date_modified = ''
-    is_content = False
-
-    class Meta:
-        ordering = ['-date']
-
+class Article(Model):
     class Type(models.IntegerChoices):
         ARTICLE = 1
         YOUTUBE = 2
         ALBUM = 4
         STREAM = 5
+
+    article_type = models.PositiveSmallIntegerField(choices=Type, default=Type.ARTICLE)
+    cache_content = models.TextField()
+    code = models.TextField(blank=True)
+    content = models.TextField()
+    cover = models.CharField(max_length=100, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    is_comments = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=True)
+    status = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.title
@@ -39,17 +38,14 @@ class Article(Document):
         self.content = self.content.replace(*values)
 
     def get_code(self):
-        if self.type == Article.Type.YOUTUBE:
+        if self.article_type == Article.Type.YOUTUBE:
             return self.code.replace('\r\n', ',')
-        elif self.type == Article.Type.STREAM:
+        elif self.article_type == Article.Type.STREAM:
             config = configparser.ConfigParser()
             config.read_string(f'[6bb]\r\n{self.code}')
             return config['6bb']
 
     def get_content(self):
-        if self.is_content:
-            return self.content
-        self.is_content = True
         commands = []
         strings = self.content.split('\r\n')
         while True:
@@ -66,19 +62,13 @@ class Article(Document):
         return self.content
 
     def get_cover(self):
-        if self.cover or not self.images:
+        if self.cover or not self.images_list:
             image = self.cover
         else:
-            image = self.images[-1]
+            image = self.images_list[-1]
         if image and image[0] not in ['/', 'h']:
             image = f'/store/thumbnails/{image}'
         return image
 
     def get_intro(self):
         return self.content.split('\r\n', 1)[0]
-
-    def get_types_dump(self):
-        return {'date_modified': str}
-
-    def get_types_load(self):
-        return {'date_modified': datetime.fromisoformat}

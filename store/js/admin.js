@@ -34,11 +34,14 @@ class Items {
   }
 
   main () {
-    const images = document.getElementsByClassName('field-images')
+    let images = document.getElementsByClassName('field-get_cover')
+    if (!images.length) {
+      images = document.getElementsByClassName('field-images')
+    }
     for (const td of images) {
       const html = []
       if (td.childNodes.length) {
-        for (const image of td.childNodes[0].textContent.split(', ').filter(Boolean)) {
+        for (const image of td.childNodes[0].textContent.split('\n').filter(Boolean)) {
           html.push(this.img.replaceAll('{}', image))
         }
       }

@@ -3,7 +3,7 @@ from django.db.models import signals
 
 
 def bookmark_post_delete(instance, **kwargs):
-    for name in instance.images:
+    for name in instance.images_list:
         default_storage.delete(name)
 
 

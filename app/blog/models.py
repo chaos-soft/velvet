@@ -11,6 +11,7 @@ class Article(Model):
         YOUTUBE = 2
         ALBUM = 4
         STREAM = 5
+        RUTUBE = 6
 
     article_type = models.PositiveSmallIntegerField(choices=Type, default=Type.ARTICLE)
     cache_content = models.TextField()
@@ -44,6 +45,8 @@ class Article(Model):
             config = configparser.ConfigParser()
             config.read_string(f'[6bb]\r\n{self.code}')
             return config['6bb']
+        else:
+            return self.code.split('\r\n')
 
     def get_content(self):
         commands = []

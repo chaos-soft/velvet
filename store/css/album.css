@@ -1,0 +1,9 @@
+.album > a {
+  display: inline-block;
+  margin: 0 10px 20px 10px;
+}
+
+.album > a > img {
+  max-height: 220px;
+}
+

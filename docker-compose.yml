@@ -1,14 +1,17 @@
 services:
   db:
     environment:
-      MYSQL_DATABASE: velvet
-      MYSQL_ROOT_PASSWORD: root
-    image: mariadb:10
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: velvet
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+    image: postgres:16
     ports:
-      - '127.0.0.1:3306:3306'
+      - '127.0.0.1:5432:5432'
     restart: unless-stopped
+    shm_size: 128mb
     volumes:
-      - ../velvet_db:/var/lib/mysql
+      - ../velvet_db:/var/lib/postgresql/data
   velvet:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -16,7 +19,7 @@ services:
       - db
     environment:
       DJANGO_SETTINGS_MODULE: config.settings_dev
-    image: velvet:20240318
+    image: velvet:20240807
     ports:
       - '0.0.0.0:80:8000'
     restart: unless-stopped
@@ -24,6 +27,7 @@ services:
     stop_signal: SIGINT
     tty: true
     volumes:
+      - ./.pg_service.conf:/root/.pg_service.conf
       - ./app:/velvet
       - ./store:/velvet/store
     working_dir: /velvet

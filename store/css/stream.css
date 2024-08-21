@@ -1,0 +1,111 @@
+.panel > .chats,
+.panel > .controls,
+.stream {
+  display: flex;
+  justify-content: center;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.panel {
+  background-color: rgba(0, 0, 0, .7);
+  display: none;
+  position: absolute;
+}
+
+.panel > .chats {
+  justify-content: normal;
+  overflow-x: auto;
+  padding-top: 20px;
+}
+
+.panel > .controls {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.panel > .controls > * {
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.panel > .controls > .active {
+  color: var(--blue);
+}
+
+.panel > div > * {
+  margin-bottom: 20px;
+}
+
+.stream {
+  background: top center no-repeat black;
+  background-size: contain;
+  height: 100vh;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stream iframe {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 600px) {
+  .panel {
+    border-radius: 4px 4px 0 0;
+    bottom: 0;
+    display: block;
+    left: 50%;
+    transition: transform 200ms;
+    width: 100%;
+  }
+
+  .panel > .chats > iframe {
+    height: 620px;
+    min-width: 50%;
+  }
+
+  .panel.hidden {
+    transform: translate(-50%, calc(100% - 10px));
+  }
+
+  .panel,
+.panel:hover {
+    transform: translate(-50%, 0);
+  }
+
+  .stream > iframe {
+    height: 37%;
+  }
+}
+
+@media (min-width: 960px) {
+  .panel {
+    width: auto;
+  }
+
+  .panel > .chats > iframe {
+    height: 700px;
+    min-width: 380px;
+  }
+
+  .panel > div,
+.panel > div > * {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .stream {
+    background-position: center;
+    height: 860px;
+  }
+
+  .stream > iframe {
+    height: auto;
+  }
+}
+

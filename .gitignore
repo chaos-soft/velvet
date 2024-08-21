@@ -140,5 +140,5 @@ dmypy.json
 **/store/out/
 **/store/sitemap.xml
 **/store/thumbnails/
-/backup.json
+/backup.json*
 /LOG

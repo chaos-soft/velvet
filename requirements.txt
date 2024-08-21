@@ -1,4 +1,4 @@
--e git+https://github.com/ytdl-org/youtube-dl.git@40bd5c18153afe765caa6726302ee1dd8a9a2ce6#egg=youtube_dl
+-e git+https://github.com/ytdl-org/youtube-dl.git@c5098961b04ce83f4615f2a846c84f803b072639#egg=youtube_dl
 beautifulsoup4==4.12.3
 coverage==7.4.3
 django-cors-headers==4.3.1
@@ -6,5 +6,5 @@ django-debug-toolbar==4.3.0
 django==5.0.2
 djangorestframework==3.14.0
 markdown==3.5.2
-mysqlclient==2.2.4
+psycopg
 requests==2.31.0

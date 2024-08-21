@@ -1,35 +1,54 @@
-textarea,
-input[type=text] {
-  width: 1024px;
+input[type=text],
+textarea {
+  width: 940px !important;
 }
 
-:root {
+html[data-theme='dark'] {
+  --body-bg: #252a33;
+  --body-fg: #eceff4;
+  --border-color: #4c566a;
+  --darkened-bg: rgba(0, 0, 0, .2);
   --font-family-primary: 'helvetica neue';
+}
+
+html[data-theme='light'] {
+  --body-fg: black;
+  --body-quiet-color: black;
+}
+
+textarea {
+  height: 460px;
+}
+
+#content * {
+  font: 10.2pt sans-serif;
+}
+
+.aligned .vCheckboxLabel {
+  padding-top: 7px;
 }
 
 .field-images > div > div > label {
   float: none;
 }
+
 .field-images > div > div > p {
   text-align: center;
 }
+
 .field-images > div > div > p > img {
-  border: 5px solid rgba(0, 0, 0, .14);
   border-radius: 4px;
+  border: 5px solid rgba(0, 0, 0, .14);
   cursor: pointer;
   margin: 3px;
   transition: border-color 200ms;
 }
+
 .field-images > div > div > p > img.selected {
-  border-color: rgba(255, 0, 0, .5);
+  border-color: #d8dee9;
 }
+
 .field-images > div > div > textarea {
   display: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --body-fg: black;
-    --body-quiet-color: black;
-  }
-}

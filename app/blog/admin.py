@@ -19,6 +19,7 @@ class ArticleAdmin(Admin):
         'get_cover',
     ]
     list_display_links = ['id', '__str__']
+    search_fields = ['id', 'content']
 
     class Media:
         js = ['admin_blog.js']

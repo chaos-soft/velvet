@@ -1,14 +1,13 @@
-from datetime import datetime
-
-from common.models import Document
+from common.models import Model
 from django.db import models
 
 
-class Bookmark(Document):
+class Bookmark(Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    title = ''
-    urls: list[str] = list()
-    date = ''
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, blank=True, null=True)
+    title = models.CharField(max_length=200, blank=True)
+    urls = models.TextField()
 
     class Meta:
         ordering = ['-id']
@@ -16,18 +15,11 @@ class Bookmark(Document):
     def __str__(self):
         return self.title
 
-    def get_types_dump(self):
-        return {'date': str}
-
-    def get_types_load(self):
-        return {'date': datetime.fromisoformat}
-
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
     level = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True,
-                               null=True)
+    name = models.CharField(max_length=100)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f'-- {self.name}' if self.parent_id else self.name

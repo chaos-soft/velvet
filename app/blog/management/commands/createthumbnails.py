@@ -7,5 +7,5 @@ from blog.models import Article
 class Command(BaseCommand):
     def handle(self, *args, **options):
         for article in Article.objects.all().iterator():
-            for name in article.images:
+            for name in article.images_list:
                 create_thumbnail(name)

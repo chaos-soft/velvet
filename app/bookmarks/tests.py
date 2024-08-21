@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.contrib.admin.sites import AdminSite
 from django.core.files.storage import default_storage
 from django.test import SimpleTestCase
@@ -17,7 +15,7 @@ class CategoryTest(Category):
 
 class BookmarkForm(forms.BookmarkForm):
     class Meta:
-        fields = ['title', 'urls', 'screenshot']
+        fields = ['title', 'urls', 'screenshot', 'images']
         model = Bookmark
 
 
@@ -28,30 +26,28 @@ class BookmarksTest(SimpleTestCase):
 
         self.bookmark1 = Bookmark(id=1, category=self.category2)
         self.bookmark1.title = 'c5j'
-        self.bookmark1.urls = ['hda', 'n0k']
+        self.bookmark1.urls = 'hda\r\nn0k'
 
         self.bookmark2 = Bookmark(category=self.category1)
 
     def test_admin(self):
         admin = BookmarkAdmin(Bookmark, AdminSite)
-        self.assertEqual(admin.title(self.bookmark1),
-                         '<a href="hda">c5j</a><br><a href="n0k">02</a>')
+        self.assertEqual(admin.get_title(self.bookmark1), '<a href="hda">c5j</a><br><a href="n0k">02</a>')
         self.assertEqual(admin.get_category(self.bookmark1), 'q0t/haokx9')
         self.assertEqual(admin.get_category(self.bookmark2), 'q0t')
 
     def test_forms(self):
-        post = {'urls': 'https://57st.net\r\nv5i'}
+        post = {'urls': 'https://www.kindgirls.com/gallery.php?id=2737\r\nv5i'}
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertEqual(form.initial['urls'], 'hda\r\nn0k')
         self.assertTrue(form.is_valid())
-        form.save(commit=False)
-        self.assertEqual(self.bookmark1.urls, ['https://57st.net', 'v5i'])
-        self.assertEqual(self.bookmark1.title, '57 Street — статьи, стримы и всякое')
+        self.bookmark1 = form.save(commit=False)
+        self.assertEqual(self.bookmark1.urls, 'https://www.kindgirls.com/gallery.php?id=2737\r\nv5i')
+        self.assertEqual(self.bookmark1.title, 'Linda D nude in 20 photos from Met-Art')
         post['title'] = 'poh'
         form = BookmarkForm(post, instance=self.bookmark2)
         self.assertTrue(form.is_valid())
-        form.save(commit=False)
-        self.assertEqual(self.bookmark2.date.date(), datetime.today().date())
+        self.bookmark2 = form.save(commit=False)
         form = BookmarkForm({})
         self.assertFalse(form.is_valid())
         self.xtest_forms_xclean_screenshot(post)
@@ -65,22 +61,22 @@ class BookmarksTest(SimpleTestCase):
         post['screenshot'] = BookmarkForm.Screenshot.HEIGHT
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertTrue(form.is_valid())
-        form.save(commit=False)
-        self.assertEqual(len(self.bookmark1.images), 1)
-        self.assertTrue(default_storage.exists(self.bookmark1.images[0]))
+        self.bookmark1 = form.save(commit=False)
+        self.assertEqual(len(self.bookmark1.images_list), 1)
+        self.assertTrue(default_storage.exists(self.bookmark1.images_list[0]))
         post['urls'] = 'https://www.youtube.com/watch?v=ljvvHgb1h_4'
         post['screenshot'] = BookmarkForm.Screenshot.YOUTUBE_DL
-        post['images'] = self.bookmark1.images[0]
+        post['images'] = self.bookmark1.images_list[0]
         form = BookmarkForm(post, instance=self.bookmark1)
         self.assertTrue(form.is_valid())
-        form.save(commit=False)
-        self.assertEqual(len(self.bookmark1.images), 2)
-        self.assertTrue(default_storage.exists(self.bookmark1.images[-1]))
+        self.bookmark1 = form.save(commit=False)
+        self.assertEqual(len(self.bookmark1.images_list), 2)
+        self.assertTrue(default_storage.exists(self.bookmark1.images_list[-1]))
         self.xtest_signals()
 
     def xtest_signals(self):
         bookmark_post_delete(self.bookmark1)
-        for name in self.bookmark1.images:
+        for name in self.bookmark1.images_list:
             self.assertFalse(default_storage.exists(name))
         category_post_save(self.category1)
         self.assertEqual(self.category1.level, 1)

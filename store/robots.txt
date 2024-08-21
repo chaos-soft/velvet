@@ -1,2 +1,2 @@
-Sitemap: https://57st.net/store/sitemap.xml
+Sitemap: https://57st.su/store/sitemap.xml
 User-agent: *

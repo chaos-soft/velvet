@@ -1,12 +1,11 @@
-from common.admin import DocumentAdmin
+from common.admin import Admin
 from django.contrib import admin
 
-from .forms import ProductForm
 from .models import Product
 
 
-class ProductAdmin(DocumentAdmin):
-    form = ProductForm
+class ProductAdmin(Admin):
+    fields = ['name', 'price', 'date']
     list_display = [
         'id',
         '__str__',

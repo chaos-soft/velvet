@@ -6,5 +6,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         total = 0
         for article in Article.objects.all().iterator():
-            total += len(article.images)
+            total += len(article.images_list)
         self.stdout.write(f'{total}')

@@ -5,9 +5,11 @@ COPY requirements.txt .
 RUN apt-get update; \
     apt-get install -y --no-install-recommends \
         build-essential \
-        default-libmysqlclient-dev \
+        file \
         git \
+        imagemagick \
         pkg-config \
+        postgresql-contrib \
         wkhtmltopdf; \
     \
     pip install --no-cache-dir --upgrade pip; \

@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from common.forms import DocumentForm
+from common.forms import Form
 from common.functions import get_html_title, get_thumbnail, take_screenshot
 from django import forms
 from django.db import models
@@ -8,7 +6,7 @@ from django.db import models
 from .models import Bookmark, Category
 
 
-class BookmarkForm(DocumentForm):
+class BookmarkForm(Form):
     class Screenshot(models.IntegerChoices):
         EMPTY = 0, '-' * 9
         FULL = 1, 'full'
@@ -16,33 +14,23 @@ class BookmarkForm(DocumentForm):
         YOUTUBE_DL = 2, 'youtube-dl'
 
     UPLOAD_TO = 'bookmarks/%Y/%m/%d/'
-    title = forms.CharField(required=False)
-    urls = forms.CharField(widget=forms.Textarea)
-    screenshot = forms.TypedChoiceField(required=False, choices=Screenshot.choices,
-                                        coerce=int)
+    screenshot = forms.TypedChoiceField(required=False, choices=Screenshot.choices, coerce=int)
 
     class Meta:
-        fields = ['title', 'urls', 'screenshot', 'category']
+        fields = ['title', 'urls', 'screenshot', 'category', 'images']
         model = Bookmark
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if self.instance.id:
-            self.initial['urls'] = '\r\n'.join(self.instance.urls)
 
     def clean(self):
         cd = super().clean()
         if self.errors:
             return cd
+        cd['images'] = list(filter(None, cd['images'].split('\r\n')))
+        cd['urls'] = list(filter(None, cd['urls'].split('\r\n')))
         self.xclean_screenshot()
         self.xclean_title()
-        if not self.instance.id:
-            cd['date'] = datetime.today()
+        cd['images'] = '\r\n'.join(cd['images'])
+        cd['urls'] = '\r\n'.join(cd['urls'])
         return cd
-
-    def clean_urls(self):
-        self.cleaned_data['urls'] = list(filter(None, self.cleaned_data['urls'].split('\r\n')))
-        return self.cleaned_data['urls']
 
     def xclean_screenshot(self):
         cd = self.cleaned_data

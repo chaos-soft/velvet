@@ -134,8 +134,10 @@ dmypy.json
 **/store/bookmarks/
 **/store/css/xxx.css
 **/store/files/
+**/store/html/
 **/store/images/
 **/store/js/metrika.js
+**/store/js/react.js
 **/store/miranda/
 **/store/out/
 **/store/sitemap.xml

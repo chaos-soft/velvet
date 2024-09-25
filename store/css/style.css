@@ -101,11 +101,6 @@ body {
   font: 14px/20px -apple-system, arial, sans-serif;
 }
 
-body > div > footer {
-  display: flex;
-  justify-content: center;
-}
-
 code {
   font-family: monospace;
 }
@@ -205,6 +200,15 @@ strong {
   font-size: 26px;
 }
 
+.error > p > img {
+  border-radius: 4px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   padding-top: 20px;
 }
@@ -221,12 +225,12 @@ strong {
   transform: translateY(-50%);
 }
 
-.header > nav > * {
-  color: var(--color8);
+.header > nav .material-symbols-outlined {
+  margin-left: 10px;
 }
 
-.header > nav > .material-symbols-outlined {
-  margin-left: 10px;
+.header > nav > * {
+  color: var(--color8);
 }
 
 .header > nav > a {

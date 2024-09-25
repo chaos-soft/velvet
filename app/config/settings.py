@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from django.conf.locale.en import formats
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,6 +140,8 @@ DATE_FORMAT = 'Y-m-d'
 # Дата в blog.
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 FILE_UPLOAD_HANDLERS = ['django.core.files.uploadhandler.TemporaryFileUploadHandler']
+formats.DATE_FORMAT = DATE_FORMAT
+formats.DATETIME_FORMAT = DATETIME_FORMAT
 MEDIA_ROOT = BASE_DIR / 'store/'
 MEDIA_URL = '/store/'
 REST_FRAMEWORK = {

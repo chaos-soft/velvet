@@ -44,6 +44,22 @@ def main() -> int:
     assert r.status_code == 200
     assert r.headers['content-type'] == 'text/xml; charset=utf-8'
 
+    r = requests.get('https://57st.su/articles/57x', allow_redirects=False)
+    assert r.status_code == 404
+    assert r.headers['content-type'] == 'text/html; charset=utf-8'
+
+    r = requests.get('https://57st.su/pages/1', allow_redirects=False)
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'text/html; charset=utf-8'
+
+    r = requests.get('https://57st.su/?page=1', allow_redirects=False)
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'text/html; charset=utf-8'
+
+    r = requests.get('https://57st.su/error.html', allow_redirects=False)
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'text/html; charset=utf-8'
+
     return 0
 
 

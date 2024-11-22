@@ -17,7 +17,7 @@ server {
     add_header 'Access-Control-Allow-Origin' '*';
     charset utf-8;
     error_page 404 /error.html;
-    expires 5m;
+    expires 6h;
     listen 80;
     root /velvet/store;
     server_name 57st.su;

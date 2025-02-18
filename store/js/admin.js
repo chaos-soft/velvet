@@ -40,7 +40,7 @@ class Items {
     }
     for (const td of images) {
       const html = []
-      if (td.childNodes.length) {
+      if (td.childNodes[0].textContent !== '-') {
         for (const image of td.childNodes[0].textContent.split('\n').filter(Boolean)) {
           html.push(this.img.replaceAll('{}', image))
         }

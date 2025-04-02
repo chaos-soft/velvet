@@ -4,7 +4,7 @@ from django.db import models
 
 class Bookmark(Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    date = models.DateTimeField('date created', auto_now_add=True, blank=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, blank=True, null=True)
     title = models.CharField(max_length=200, blank=True)
     urls = models.TextField()

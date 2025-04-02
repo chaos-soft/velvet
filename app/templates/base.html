@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="light">
   <head>
     <link rel="icon" href="/store/images/icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,8 @@
     <script type="module" crossorigin src="/store/js/react.js"></script>
     <title>{% block title %}57 Street — статьи, стримы, Linux, лас плагас{% endblock %}</title>
     {% block meta %}{% endblock %}
-    {% if debug %}
-      <link rel="stylesheet" href="/store/css/reset.css">
-      <link rel="stylesheet" href="/store/css/album.css">
-      <link rel="stylesheet" href="/store/css/articles.css">
-      <link rel="stylesheet" href="/store/css/rutube.css">
-      <link rel="stylesheet" href="/store/css/slideshow.css">
-      <link rel="stylesheet" href="/store/css/stream.css">
-      <link rel="stylesheet" href="/store/css/style.css">
-    {% else %}
-      <link rel="stylesheet" href="/store/css/xxx.css">
+    <link rel="stylesheet" href="/store/css/style.css">
+    {% if not debug %}
       <script src="/store/js/metrika.js"></script>
     {% endif %}
   </head>
@@ -31,7 +23,9 @@
     <header class="header wrapper">
       <h1><a href="/"><span>5</span><span>7</span> Street</a></h1>
       <nav>
-        <a href="{% url 'article' 57 %}">Мой маленький стрим</a><i id="theme"></i>
+        <a href="{% url 'article' 57 %}">Мой маленький стрим</a>
+        <a id="search_anchor"></a>
+        <i id="theme"></i>
       </nav>
     </header>
     <div class="line mb40"></div>
@@ -42,9 +36,10 @@
     </noscript>
     {% block content %}{% endblock %}
     <div class="line mb20"></div>
-    <footer class="footer">
-      <p>© 2008–2024 57st.net, 2024–2057 <a href="/">57st.su</a></p>
-      <p><a href="{% url 'article' 79 %}">О сайте</a></p>
+    <footer class="footer wrapper">
+      <div>© 2008–2024 57st.net</div>
+      <div>2024–2057 <a href="/">57st.su</a></div>
+      <div><a href="{% url 'article' 79 %}">О сайте</a></div>
     </footer>
   </body>
 </html>

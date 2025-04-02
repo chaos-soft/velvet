@@ -19,7 +19,7 @@ class Article(Model):
     code = models.TextField(blank=True)
     content = models.TextField()
     cover = models.CharField(max_length=100, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField('date created', auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     is_comments = models.BooleanField(default=True)
     is_published = models.BooleanField(default=True)

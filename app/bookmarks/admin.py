@@ -11,7 +11,7 @@ from .models import Bookmark, Category
 
 class BookmarkAdmin(Admin):
     form = BookmarkForm
-    list_display = ['id', 'get_title', 'images', 'get_category', 'date', 'date_modified']
+    list_display = ['id', 'get_title', 'images', 'get_category', 'date_modified', 'date']
     list_filter = ['category']
     search_fields = ['id', 'title', 'urls']
 

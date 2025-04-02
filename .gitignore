@@ -132,7 +132,7 @@ dmypy.json
 **/store/api/
 **/store/blog/
 **/store/bookmarks/
-**/store/css/xxx.css
+**/store/css/style.css
 **/store/files/
 **/store/html/
 **/store/images/

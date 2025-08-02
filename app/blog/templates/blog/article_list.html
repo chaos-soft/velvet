@@ -1,29 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-  <main class="articles wrapper">
-    {% for object in object_list %}
-      <article>
-        <h2><a href="{{ object.get_absolute_url }}">{{ object }}</a></h2>
-        <p>{{ object.get_intro }}</p>
-        {% if object.get_cover %}
-          <p>
-            <a href="{{ object.get_absolute_url }}">
-              <img src="{{ object.get_cover }}" alt="{{ object }}">
-            </a>
-          </p>
-        {% endif %}
-      </article>
-    {% endfor %}
-    <nav>
-      <ul>
-        {% for page in page_obj.paginator.page_range %}
-          {% if page == page_obj.number %}
-            <li>{{ page }}</li>
-          {% else %}
-            <li><a href="/?page={{ page }}">{{ page }}</a></li>
+  <main>
+    <div class="articles wrapper">
+      {% for object in object_list %}
+        <article>
+          <h2><a href="{{ object.get_absolute_url }}">{{ object }}</a></h2>
+          <p>{{ object.get_intro }}</p>
+          {% if object.get_cover %}
+            <p>
+              <a href="{{ object.get_absolute_url }}">
+                <img src="{{ object.get_cover }}" alt="{{ object }}">
+              </a>
+            </p>
           {% endif %}
-        {% endfor %}
-      </ul>
-    </nav>
+        </article>
+      {% endfor %}
+      <nav>
+        <ul>
+          {% for page in page_obj.paginator.page_range %}
+            {% if page == page_obj.number %}
+              <li>{{ page }}</li>
+            {% else %}
+              <li><a href="/?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
   </main>
 {% endblock %}

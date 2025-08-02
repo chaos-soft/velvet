@@ -4,7 +4,7 @@
     <link rel="icon" href="/store/images/icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lunasima:wght@700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
     <meta charset="utf-8">
     <meta name="description" content="{% block description %}{% endblock %}">
@@ -20,26 +20,20 @@
   </head>
   <body>
     <script>let articleType = null</script>
-    <header class="header wrapper">
-      <h1><a href="/"><span>5</span><span>7</span> Street</a></h1>
-      <nav>
-        <a href="{% url 'article' 57 %}">Мой маленький стрим</a>
-        <a id="search_anchor"></a>
-        <i id="theme"></i>
-      </nav>
+    <header class="header">
+      <div class="wrapper">
+        <a href="/"></a>
+        <nav>
+          <a href="{% url 'article' 57 %}">Мой маленький стрим</a>
+          <a id="search_anchor"></a>
+        </nav>
+      </div>
     </header>
-    <div class="line mb40"></div>
-    <noscript>
-      <main class="wrapper">
-        Похоже, что в браузере отключен JavaScript, а без него ничего работать не будет.
-      </main>
-    </noscript>
     {% block content %}{% endblock %}
-    <div class="line mb20"></div>
-    <footer class="footer wrapper">
-      <div>© 2008–2024 57st.net</div>
-      <div>2024–2057 <a href="/">57st.su</a></div>
-      <div><a href="{% url 'article' 79 %}">О сайте</a></div>
+    <footer class="footer">
+      <div class="wrapper" id="theme">
+        <noscript>Похоже, что в браузере отключен JavaScript, а без него ничего работать не будет.</noscript>
+      </div>
     </footer>
   </body>
 </html>

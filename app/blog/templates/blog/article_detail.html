@@ -5,22 +5,27 @@
   <div id="album"></div>
   <div id="rutube"></div>
   <div id="stream"></div>
-  <main class="article wrapper">
-    <h1>{{ object }}</h1>
-    {% if object.article_type == object.Type.YOUTUBE %}
-      <div class="iframe">
-        <iframe
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          src="https://www.youtube.com/embed/?playlist={{ object.get_code }}&loop=1"
-        >
-        </iframe>
-      </div>
-    {% endif %}
-    <div>{{ object.get_content|safe }}</div>
-    {% if object.is_published %}
-      <footer class="tac">{{ object.date }}</footer>
-    {% endif %}
+  <main>
+    <div class="article wrapper">
+      <h1>{{ object }}</h1>
+      {% if object.article_type == object.Type.YOUTUBE %}
+        <div class="iframe">
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            src="https://www.youtube.com/embed/?playlist={{ object.get_code }}&loop=1"
+          >
+          </iframe>
+        </div>
+      {% endif %}
+      <div>{{ object.get_content|safe }}</div>
+      {% if object.is_published %}
+        <footer>
+          <div><a href="/articles/57">chaos-soft</a></div>
+          <div class="tar">{{ object.date }}</div>
+        </footer>
+      {% endif %}
+    </div>
   </main>
   {% if object.article_type == object.Type.ALBUM %}
     <script>

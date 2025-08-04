@@ -10,12 +10,12 @@ class ArticleAdmin(Admin):
     list_display = [
         'id',
         '__str__',
-        'date',
-        'date_modified',
         'is_comments',
         'is_published',
         'article_type',
         'status',
+        'date_modified',
+        'date',
         'get_cover',
     ]
     list_display_links = ['id', '__str__']

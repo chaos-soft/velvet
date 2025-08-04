@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block description %}{{ object.get_intro }}{% endblock %}
+{% block title %}{{ object }}{% endblock %}
+{% block content %}
+  <div id="album"></div>
+  <div id="rutube"></div>
+  <div id="stream"></div>
+  <main>
+    <div class="article wrapper">
+      <h1>{{ object }}</h1>
+      {% if object.article_type == object.Type.YOUTUBE %}
+        <div class="iframe">
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            src="https://www.youtube.com/embed/?playlist={{ object.get_code }}&loop=1"
+          >
+          </iframe>
+        </div>
+      {% endif %}
+      <div>{{ object.get_content|safe }}</div>
+      {% if object.is_published %}
+        <footer>
+          <div><a href="/articles/57">chaos-soft</a></div>
+          <div class="tar">{{ object.date }}</div>
+        </footer>
+      {% endif %}
+    </div>
+  </main>
+  {% if object.article_type == object.Type.ALBUM %}
+    <script>
+      articleType = {{ object.article_type }}
+    </script>
+    {{ object.images_list|json_script:"data" }}
+  {% elif object.article_type == object.Type.RUTUBE or object.article_type == object.Type.STREAM %}
+    <script>
+      articleType = {{ object.article_type }}
+    </script>
+    {{ object.get_code|json_script:"data" }}
+  {% endif %}
+{% endblock %}

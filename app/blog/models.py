@@ -2,6 +2,7 @@ import configparser
 
 from common.models import Model
 from django.db import models
+from django.urls import reverse
 import markdown
 
 
@@ -18,7 +19,7 @@ class Article(Model):
     code = models.TextField(blank=True)
     content = models.TextField()
     cover = models.CharField(max_length=100, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField('date created', auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     is_comments = models.BooleanField(default=True)
     is_published = models.BooleanField(default=True)
@@ -29,6 +30,8 @@ class Article(Model):
         ordering = ['-date']
 
     def __str__(self):
+        if self.article_type == Article.Type.ALBUM:
+            return f'{self.title} ({len(self.images_list)})'
         return self.title
 
     def command_color(self, values):
@@ -38,13 +41,16 @@ class Article(Model):
     def command_replace(self, values):
         self.content = self.content.replace(*values)
 
+    def get_absolute_url(self):
+        return reverse('article', kwargs={'pk': self.pk})
+
     def get_code(self):
         if self.article_type == Article.Type.YOUTUBE:
             return self.code.replace('\r\n', ',')
         elif self.article_type == Article.Type.STREAM:
             config = configparser.ConfigParser()
             config.read_string(f'[6bb]\r\n{self.code}')
-            return config['6bb']
+            return dict(config['6bb'])
         else:
             return self.code.split('\r\n')
 

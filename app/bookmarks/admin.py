@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from common.admin import Admin
 from django.contrib import admin
 from django.utils.html import format_html_join
@@ -9,7 +11,7 @@ from .models import Bookmark, Category
 
 class BookmarkAdmin(Admin):
     form = BookmarkForm
-    list_display = ['id', 'get_title', 'images', 'get_category', 'date', 'date_modified']
+    list_display = ['id', 'get_title', 'images', 'get_category', 'date_modified', 'date']
     list_filter = ['category']
     search_fields = ['id', 'title', 'urls']
 
@@ -26,7 +28,8 @@ class BookmarkAdmin(Admin):
         urls = obj.urls.split('\r\n')
         links = [(urls[0], obj)]
         for i, url in enumerate(urls[1:]):
-            links += [(url, str(i + 2).zfill(2))]
+            o = urlparse(url)
+            links += [(url, f'{i + 2} {o.hostname}')]
         return format_html_join(mark_safe('<br>'), '<a href="{}">{}</a>', links)
 
 

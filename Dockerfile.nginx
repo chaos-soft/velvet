@@ -1,0 +1,12 @@
+FROM alpine:3
+
+RUN apk -U upgrade; \
+    apk add --no-cache --virtual .nginx-rtmp \
+        nginx \
+        nginx-mod-rtmp
+
+EXPOSE 80
+
+STOPSIGNAL SIGQUIT
+
+CMD ["nginx", "-g", "daemon off;"]

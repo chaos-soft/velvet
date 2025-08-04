@@ -5,7 +5,7 @@ services:
       POSTGRES_DB: velvet
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
-    image: postgres:16
+    image: postgres:17
     ports:
       - '127.0.0.1:5432:5432'
     restart: unless-stopped

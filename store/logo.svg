@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1000"
+   height="200"
+   viewBox="0 0 1000 200"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.30625"
+     inkscape:cx="511.38756"
+     inkscape:cy="167.6555"
+     inkscape:window-width="1916"
+     inkscape:window-height="1035"
+     inkscape:window-x="4"
+     inkscape:window-y="45"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="fill:#ffffff;fill-opacity:1"
+     inkscape:export-filename="/home/chaos/tmp/logo.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(37.76799,-8.1240015)">
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:bold;font-size:40px;font-family:'Hemi Head';-inkscape-font-specification:'Hemi Head Bold Italic';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#d8dee9;fill-opacity:1"
+       x="-40.76799"
+       y="121.664"
+       id="text1"
+       inkscape:export-filename="images/logo_white.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       inkscape:label="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="-40.76799"
+         y="121.664">57 Street</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:bold;font-size:40px;font-family:'Hemi Head';-inkscape-font-specification:'Hemi Head Bold Italic';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#bac2de;fill-opacity:1"
+       x="369.31204"
+       y="121.664"
+       id="text2"
+       inkscape:export-filename="images/logo_black.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="369.31204"
+         y="121.664">57 Street</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:bold;font-size:40px;font-family:'Hemi Head';-inkscape-font-specification:'Hemi Head Bold Italic';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#4c566a;fill-opacity:1"
+       x="779.39203"
+       y="121.664"
+       id="text3"
+       inkscape:export-filename="images/logo_black.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="779.39203"
+         y="121.664">57 Street</tspan></text>
+  </g>
+</svg>

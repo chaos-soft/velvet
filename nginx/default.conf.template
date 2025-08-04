@@ -16,6 +16,8 @@ server {
 server {
     add_header 'Access-Control-Allow-Origin' '*';
     charset utf-8;
+    error_page 404 /error.html;
+    expires 6h;
     listen 80;
     root /velvet/store;
     server_name 57st.su;
@@ -31,13 +33,16 @@ server {
     ssl_session_timeout 10m;
 
     location / {
-        root /velvet/store/dist;
-        try_files $uri $uri.html $uri/ =404;
+        root /velvet/store/html;
+        try_files $uri /pages/$arg_page.html $uri.html $uri/ =404;
     }
 
     location /api/articles/ {
-        expires 5m;
         try_files $uri $uri.json =404;
+    }
+
+    location /error.html {
+        root /velvet/store/html;
     }
 
     location /miranda {
@@ -48,6 +53,7 @@ server {
     }
 
     location /store/ {
+        expires 12h;
         root /velvet;
     }
 
@@ -63,7 +69,7 @@ server {
     location ~ ^/(robots.txt|.well-known/|sitemap.xml) {
     }
 
-    location ~ ^/(articles|slideshow)/\d+$ {
-        try_files $uri /dist/index.html =404;
+    location ~ ^/articles/\d+$ {
+        try_files $uri /html/$uri.html =404;
     }
 }

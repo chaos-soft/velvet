@@ -1,5 +1,8 @@
 services:
   nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     image: velvet-nginx:20241001
     ports:
       - '1935:1935'

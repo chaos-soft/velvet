@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <link rel="stylesheet" href="src/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ object }}</title>
+  </head>
+  <body class="bg-slate-800 text-slate-200 font-roboto text-lg">
+    <header class="mb-6 bg-linear-to-r from-black/30 to-slate-700">
+      <h1 class="text-xl p-2 pl-3 ml-auto mr-auto lg:w-5xl">{{ object }}</h1>
+    </header>
+    {% block content %}{% endblock %}
+    <footer class="text-sm text-center pb-3 flex gap-6 justify-center">
+      <p>Сделано с помощью Tailwind CSS</p>
+      <p>{{ object.date_modified }}</p>
+    </footer>
+  </body>
+</html>

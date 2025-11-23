@@ -13,6 +13,7 @@ class ArticleAdmin(Admin):
         'is_comments',
         'is_published',
         'article_type',
+        'template',
         'status',
         'date_modified',
         'date',

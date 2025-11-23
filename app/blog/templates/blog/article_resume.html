@@ -1,0 +1,7 @@
+{% extends "resume.html" %}
+{% block title %}{{ object }}{% endblock %}
+{% block content %}
+  <main class="ml-auto mr-auto lg:w-5xl pl-3 pr-3">
+      <div>{{ object.get_content|safe }}</div>
+  </main>
+{% endblock %}

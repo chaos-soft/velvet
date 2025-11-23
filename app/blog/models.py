@@ -7,6 +7,10 @@ import markdown
 
 
 class Article(Model):
+    class Template(models.IntegerChoices):
+        ARTICLE_DETAIL = 1
+        ARTICLE_RESUME = 2
+
     class Type(models.IntegerChoices):
         ARTICLE = 1
         YOUTUBE = 2
@@ -24,6 +28,7 @@ class Article(Model):
     is_comments = models.BooleanField(default=True)
     is_published = models.BooleanField(default=True)
     status = models.CharField(max_length=100, blank=True)
+    template = models.PositiveSmallIntegerField(choices=Template, blank=True, null=True)
     title = models.CharField(max_length=100)
 
     class Meta:

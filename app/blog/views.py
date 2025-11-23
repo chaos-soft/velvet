@@ -29,6 +29,12 @@ class ArticleView(DetailView):
     http_method_names = ['get']
     model = Article
 
+    def get_template_names(self):
+        if self.object.template:
+            return [f'blog/{self.object.Template(self.object.template).name.lower()}.html']
+        else:
+            return super().get_template_names()
+
 
 class SitemapView(ArticlesView):
     paginate_by = 50000

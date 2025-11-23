@@ -16,6 +16,7 @@ class ArticleForm(Form):
             'is_comments',
             'is_published',
             'article_type',
+            'template',
             'cover',
             'code',
             'get_youtube_image',

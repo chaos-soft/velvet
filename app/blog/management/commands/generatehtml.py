@@ -16,7 +16,7 @@ class Command(BaseCommand):
         factory = RequestFactory()
         request = factory.get('')
         html = {}
-        p = Paginator(Article.objects.filter(is_published=True), ArticlesView.paginate_by)
+        p = Paginator(ArticlesView.queryset, ArticlesView.paginate_by)
         for page in p.page_range:
             html[f'html/pages/{page}.html'] = ArticlesView.as_view()(request, page=page).render().content
         for article in Article.objects.all():

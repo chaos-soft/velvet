@@ -8,7 +8,7 @@ from .serializers import ArticleSerializer
 class ArticlesView(ListView):
     http_method_names = ['get']
     paginate_by = 10
-    queryset = Article.objects.filter(is_published=True)
+    queryset = Article.objects.filter(is_published=True).exclude(article_type=Article.Type.HIDDEN)
 
 
 class ArticlesViewSet(
@@ -21,7 +21,7 @@ class ArticlesViewSet(
 
     def get_queryset(self):
         if self.action == 'list':
-            return self.queryset.filter(is_published=True)
+            return ArticlesView.queryset
         return self.queryset
 
 

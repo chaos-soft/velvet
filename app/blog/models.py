@@ -17,6 +17,7 @@ class Article(Model):
         ALBUM = 4
         STREAM = 5
         RUTUBE = 6
+        HIDDEN = 7
 
     article_type = models.PositiveSmallIntegerField(choices=Type, default=Type.ARTICLE)
     cache_content = models.TextField()
